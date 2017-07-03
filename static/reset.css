@@ -1,0 +1,418 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    /*font-family: inherit;*/
+    vertical-align: baseline;
+    /*height: 100%;*/
+}
+
+html {
+    font-family: PingFang SC, Helvetica Neue, Helvetica, Arial, Hiragino Sans GB, Microsoft Yahei, \5FAE\8F6F\96C5\9ED1, STHeiti, \534E\6587\7EC6\9ED1, sans-serif;
+    font-size: 14px;
+    background: #fff;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+img {
+    border: 0;
+    max-width: 100% !important;
+    vertical-align: middle;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+i,
+em,
+strong,
+th,
+var {
+    font-weight: normal;
+    font-style: normal;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    outline: none;
+}
+
+caption,
+th {
+    text-align: left;
+    font-weight: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+
+q:before,
+q:after {
+    content: '';
+}
+
+abbr,
+acronym {
+    border: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+:before,
+:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+    display: block;
+}
+
+
+/*去掉边框的默认聚焦样式*/
+
+button {
+    border: none;
+    outline: none;
+}
+
+input,
+textarea {
+    outline: none
+}
+
+
+/*默认a连接*/
+
+a,
+a:focus,
+a:hover {
+    color: #337ab7;
+}
+
+
+/* 清浮动*/
+
+.f-fl {
+    float: left;
+}
+
+.f-fr {
+    float: right;
+}
+
+.f-cb:after,
+.f-cb:before {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.f-cb {
+    *zoom: 1
+}
+
+
+/*字体适配*/
+
+
+/*18px*/
+
+[data-dpr="1"] .fs18 {
+    font-size: 9px;
+}
+
+[data-dpr="2"] .fs20 {
+    font-size: 18px;
+}
+
+[data-dpr="3"] .fs20 {
+    font-size: 27px;
+}
+
+
+/*20px*/
+
+[data-dpr="1"] .fs20 {
+    font-size: 10px;
+}
+
+[data-dpr="2"] .fs20 {
+    font-size: 20px;
+}
+
+[data-dpr="3"] .fs20 {
+    font-size: 30px;
+}
+
+
+/*24px*/
+
+[data-dpr="1"] .fs24 {
+    font-size: 12px;
+}
+
+[data-dpr="2"] .fs24 {
+    font-size: 24px;
+}
+
+[data-dpr="3"] .fs24 {
+    font-size: 36px;
+}
+
+
+/*28px*/
+
+[data-dpr="1"] .fs28 {
+    font-size: 14px;
+}
+
+[data-dpr="2"] .fs28 {
+    font-size: 28px;
+}
+
+[data-dpr="3"] .fs28 {
+    font-size: 42px;
+}
+
+
+/*30px*/
+
+[data-dpr="1"] .fs30 {
+    font-size: 15px;
+}
+
+[data-dpr="2"] .fs30 {
+    font-size: 30px;
+}
+
+[data-dpr="3"] .fs30 {
+    font-size: 45px;
+}
+
+
+/*34px*/
+
+[data-dpr="1"] .fs34 {
+    font-size: 17px;
+}
+
+[data-dpr="2"] .fs34 {
+    font-size: 34px;
+}
+
+[data-dpr="3"] .fs34 {
+    font-size: 51px;
+}
+
+
+/*36px*/
+
+[data-dpr="1"] .fs36 {
+    font-size: 18px;
+}
+
+[data-dpr="2"] .fs36 {
+    font-size: 36px;
+}
+
+[data-dpr="3"] .fs36 {
+    font-size: 54px;
+}
+
+
+/*40px*/
+
+[data-dpr="1"] .fs40 {
+    font-size: 20px;
+}
+
+[data-dpr="2"] .fs40 {
+    font-size: 40px;
+}
+
+[data-dpr="3"] .fs40 {
+    font-size: 60px;
+}
+
+
+/*55px*/
+
+[data-dpr="1"] .fs55 {
+    font-size: 28px;
+}
+
+[data-dpr="2"] .fs55 {
+    font-size: 55px;
+}
+
+[data-dpr="3"] .fs55 {
+    font-size: 82px;
+}
+
+
+/*60px*/
+
+[data-dpr="1"] .fs60 {
+    font-size: 30px;
+}
+
+[data-dpr="2"] .fs60 {
+    font-size: 60px;
+}
+
+[data-dpr="3"] .fs60 {
+    font-size: 90px;
+}
+
+
+/*80px*/
+
+[data-dpr="1"] .fs80 {
+    font-size: 40px;
+}
+
+[data-dpr="2"] .fs80 {
+    font-size: 80px;
+}
+
+[data-dpr="3"] .fs80 {
+    font-size: 120px;
+}
+
+
+/*120px*/
+
+[data-dpr="1"] .fs120 {
+    font-size: 60px;
+}
+
+[data-dpr="2"] .fs120 {
+    font-size: 120px;
+}
+
+[data-dpr="3"] .fs120 {
+    font-size: 180px;
+}
