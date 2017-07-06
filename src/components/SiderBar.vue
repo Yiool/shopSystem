@@ -1,7 +1,7 @@
 <template>
   <div class="sider-bar">
     <ul v-if="showFullMenu">
-      <span class="toggle-btn">切换</span>
+      <!--<span class="toggle-btn">切换</span>-->
       <li v-for="(item,i) in menuData" :key="i">
         <h3 class="main-title" @click="showSubTitle(i)">{{item.title}}</h3>
         <div class="sub-title" v-show="item.showSubTitle">
@@ -12,7 +12,7 @@
       </li>
     </ul>
     <ul v-if="!showFullMenu">
-      <span>切换</span>
+      <!--<span>切换</span>-->
       <li v-for="(item,i) in menuData" :key="i">
         <h3 class="main-title" @click="showSubTitle(i)">{{item.title}}</h3>
         <div class="sub-title" v-show="item.showSubTitle">
@@ -101,7 +101,7 @@ export default {
 <style lang="less" scoped>
 .sider-bar {
   display: inline-block;
-  height: 100%;
+  // height: 100%;
   padding: 20px 0 0 0; // background-color: #20A0FF;
   line-height: 50px;
   ul {

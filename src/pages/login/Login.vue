@@ -6,7 +6,7 @@
                     <el-input v-model="username" placeholder="请输入用户名"></el-input>
                 </el-form-item>
                 <el-form-item label="密码">
-                    <el-input v-model="password" placeholder="请输入密码"></el-input>
+                    <el-input type="password" v-model="password" placeholder="请输入密码"></el-input>
                 </el-form-item>
                 
                 <p class="warning-tips" v-show="showWarning">用户名或密码错误</p>
