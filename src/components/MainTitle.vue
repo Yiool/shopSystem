@@ -1,5 +1,13 @@
 <template>
-  <div class=""></div>
+  <div class="main-title">
+    <div class="logo">
+
+    </div>
+
+    <div>
+        
+    </div>
+  </div>
 </template>
 
 <script>

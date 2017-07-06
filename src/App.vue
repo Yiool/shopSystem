@@ -1,21 +1,26 @@
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
-    <div class="sider-box">
-      <sider-bar></sider-bar>
-    </div>
-    
+    <!--<div class="sider-box">-->
+      <!--<sider-bar></sider-bar>-->
+    <!--</div>-->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import SiderBar from './components/SiderBar'
+import data from './util/mock';
 export default {
   name: 'app',
   components: {
-    SiderBar
-  }
+    // SiderBar
+  },
+  // mounted() {
+  //   this.axios.get('http://yiool.cn').then((response) => {
+  //     console.log(response.data);         
+  //   })
+  // }
+
 }
 </script>
 
