@@ -5,9 +5,9 @@
       <li v-for="(item,i) in menuData" :key="i">
         <h3 class="main-title" @click="showSubTitle(i)">{{item.title}}</h3>
         <div class="sub-title" v-show="item.showSubTitle">
-          <p v-for="(item,i) in item.subTitles" :key="i">
+          <router-link v-for="(item,i) in item.subTitles" :key="i" :to="{path:item.path}" tag="p">
             {{item.title}}
-          </p>
+          </router-link>
         </div>
       </li>
     </ul>
@@ -18,7 +18,7 @@
         <div class="sub-title" v-show="item.showSubTitle">
           <p v-for="(item,i) in item.subTitles" :key="i">
             {{item.title}}
-          </p>
+          </p>  
         </div>
       </li>
     </ul>
@@ -28,15 +28,21 @@
 <script>
 export default {
   data() {
+
+
+
+    
     return {
       menuData: [
         {
           title: '员工管理',
           showSubTitle: false,
           itemIcon: '',
+          path:'/home/staff/all',
           subTitles: [
             {
               title: '新增员工',
+              path:'/home/staff/list',
               itmes: []
             }
           ]
@@ -45,17 +51,21 @@ export default {
           title: '商品管理',
           showSubTitle: false,
           itemIcon: '',
+          path:'/home/commodity/all',
           subTitles: [
             {
               title: '商品列表',
+              path:'/home/commodity/list',
               itmes: []
             },
             {
               title: '新增商品',
+              path:'/home/commodity/add',
               itmes: []
             },
             {
               title: '删除商品',
+              path:'/home/commodity/delete',
               itmes: []
             }
           ]
@@ -64,17 +74,11 @@ export default {
           title: '订单管理',
           showSubTitle: false,
           itemIcon: '',
+          path:'/home/order/all',
           subTitles: [
             {
               title: '订单列表',
-              itmes: []
-            },
-            {
-              title: '开单',
-              itmes: []
-            },
-            {
-              title: '关闭订单',
+              path:'/home/order/list',
               itmes: []
             }
           ]
@@ -113,6 +117,7 @@ export default {
     }
     li {
       border-bottom: 1px solid #ccc;
+      cursor: pointer;
     }
     .main-title {
       padding: 0 20px;

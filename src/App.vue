@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <top-bar v-if="isLogin"></top-bar>
-    <div class="sider-box">
-      <sider-bar></sider-bar>
-    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -41,20 +37,5 @@ export default {
 #app {
   width: 100%;
   height: 100%;
-  .sider-box {
-    width: 100%;
-    height: 100%;
-  }
-  .top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-
-  .sider-box {
-    position: absolute;
-    top: 80px;
-    left:0;
-  }
 }
 </style>

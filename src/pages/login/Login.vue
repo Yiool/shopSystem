@@ -61,7 +61,7 @@ export default {
 .login-box {
     width: 100%;
     height: 100%;
-    background: url('./images/login-bg.jpg') no-repeat center;
+    background: #fff url('./images/login-bg.jpg') no-repeat center;
     .form-box {
         width: 500px;
         padding-top: 50px;
