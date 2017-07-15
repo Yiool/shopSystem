@@ -16,17 +16,30 @@
                 </el-form-item>
             </el-form>
         </div>
+        <pagegation :pagegation-config="pagegationConfig" ></pagegation>
     </div>
 </template>
 
 <script>
 import mock from '../../util/mock';
+import Pagegation from '../../components/Pagegation'
 export default {
+    components:{
+        Pagegation
+    },
     data() {
         return {
             username: '',
             password: '',
-            showWarning:false
+            showWarning:false,
+            totalCount:100,
+            pagegationConfig:{
+                totalCount:10,
+                showPageGoto:true,
+                handler:function(data){
+                    console.log(this.totalCount,data);  //页面跳转回调函数
+                }
+            }
         }
     },
     methods: {

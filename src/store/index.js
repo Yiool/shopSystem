@@ -14,12 +14,25 @@ const actions = {
     login({ commit }) {
         commit('login');
     },
+    fetchData({ commit }, payload) {
+        axios.get({
+            page: payload,
+            pageSize: 10
+        }).then(function(res) {
+            if (res.status == 0) {
+                commit('updateData', res.data);
+            }
+        })
+    }
 }
 
 
 const mutations = {
     login(state) {
         state.isLogin = true;
+    },
+    updateData(state, data) {
+        state.dataList = data;
     }
 };
 
