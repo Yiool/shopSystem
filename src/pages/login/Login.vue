@@ -34,7 +34,7 @@ export default {
             showWarning:false,
             totalCount:100,
             pagegationConfig:{
-                totalCount:10,
+                totalCount:100,
                 showPageGoto:true,
                 handler:function(data){
                     console.log(this.totalCount,data);  //页面跳转回调函数

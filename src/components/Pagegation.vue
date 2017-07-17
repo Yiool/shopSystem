@@ -2,7 +2,15 @@
     <div class="pagegation f-cb">
         <div class="prev-btn f-fl" @click="prev()">上一页</div>
         <ul class="page-number f-fl">
-            <li v-bind:class="{active:nowIndex == item}" v-for="(item,index) in pagegationConfig.totalCount" :key="index" @click="goto(item)">
+            <li v-bind:class="{active:nowIndex == item}" v-for="(item,index) in [1]" :key="index" @click="goto(item)">
+                {{item}}
+            </li>
+            <li @click="showPrev()" v-if="nowIndex > 5">...</li>
+            <li v-bind:class="{active:nowIndex == item}" v-for="(item,index) in pageArray" :key="index" @click="goto(item)">
+                {{item}}
+            </li>
+            <li @click="showNext()" v-if="nowIndex < pagegationConfig.totalCount - 4">...</li>
+            <li v-bind:class="{active:nowIndex == item}" v-for="(item,index) in [pagegationConfig.totalCount]" :key="index" @click="goto(item)">
                 {{item}}
             </li>
         </ul>
@@ -64,10 +72,32 @@ export default {
             }
             this.nowIndex++;
             this.pagegationConfig.handler(this.nowIndex);
+        },
+        showPrev: function () {
+            this.nowIndex = this.pageArray[0] - 1;
+            this.pagegationConfig.handler(this.nowIndex);
+        },
+        showNext: function () {
+            this.nowIndex = this.pageArray[this.pageArray.length - 1] + 1;
+            this.pagegationConfig.handler(this.nowIndex);
         }
     },
     computed: {
-
+        pageArray: function () {
+            var flag = this.pagegationConfig.totalCount;
+            var nowIndex = this.nowIndex;
+            if (nowIndex < 6) {
+                return [2, 3, 4, 5];
+            } else if (this.nowIndex > flag - 5) {
+                return [flag - 4, flag - 3, flag - 2, flag - 1];
+            } else {
+                // console.log(this.pageArray);
+                // if (nowIndex >= this.pageArray[0] && nowIndex <= this.pageArray[this.pageArray.length - 1]) {
+                //     return;
+                // }
+                return [nowIndex - 2, nowIndex - 1, nowIndex, nowIndex + 1, nowIndex + 2];
+            }
+        }
     },
     mounted() {
         console.log(this.pagegationConfig);
@@ -92,7 +122,7 @@ export default {
             color: red;
         }
     }
-    .total-page {   
+    .total-page {
         margin-left: 20px;
     }
     .jump-part {
@@ -108,7 +138,7 @@ export default {
             background-color: #038ae3;
             line-height: 20px;
             position: relative;
-            top:2px; 
+            top: 2px;
         }
     }
 }
