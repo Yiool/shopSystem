@@ -16,16 +16,16 @@
                 </el-form-item>
             </el-form>
         </div>
-        <pagegation :pagegation-config="pagegationConfig" ></pagegation>
+        <Pagination :pagegation-config="pagegationConfig" ></Pagination>
     </div>
 </template>
 
 <script>
 import mock from '../../util/mock';
-import Pagegation from '../../components/Pagegation'
+// import Pagegation from '../../components/Pagegation'
 export default {
     components:{
-        Pagegation
+        // Pagegation
     },
     data() {
         return {

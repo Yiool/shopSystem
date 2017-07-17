@@ -7,11 +7,14 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store/index.js'
 
+import Pagination from './components/pagination/index.js'
+
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(ElementUI);
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
+Vue.use(Pagination);
 
 
 Vue.config.productionTip = false
