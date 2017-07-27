@@ -10,7 +10,6 @@ import Order from '../pages/order/Order'
 Vue.use(Router);
 
 export default new Router({
-    mode: 'history',
     routes: [{
             path: '/',
             redirect: '/login'
@@ -42,6 +41,7 @@ export default new Router({
                 }*/
             ]
         },
+        
         {
             path: '*',
             component: page404
