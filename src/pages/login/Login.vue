@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import mock from '../../util/mock';
+// import mock from '../../util/mock';
 // import Pagegation from '../../components/Pagegation'
 export default {
     components:{
@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         login: function () {
-            this.axios.post('http://login.cn', {
+            /*this.axios.post('http://login.cn', {
                 username: this.username,
                 password: this.password
             }).then((response) => {
@@ -55,7 +55,7 @@ export default {
                 }else {
                     this.showWarning = true;
                 }
-            })
+            })*/
             /*var payLoad = { username: this.username, password: this.password };
             this.$store.dispatch("login", payLoad).then(() => {
                 if (this.$store.state.isLogin) {
@@ -75,6 +75,9 @@ export default {
                 this.login();
             }
         };
+        this.axios.post('http://localhost:8080?userid=0&type=1').then((res)=>{
+            console.log(res.data);
+        })
     }
 }
 </script>
@@ -83,7 +86,7 @@ export default {
 .login-box {
     width: 100%;
     height: 100%;
-    background: #fff url('./images/login-bg.jpg') no-repeat center;
+    background: url('./images/login-bg.jpg') center;
     .form-box {
         width: 500px;
         padding-top: 50px;
@@ -93,6 +96,8 @@ export default {
         top: 150px;
         right: 300px;
         box-shadow: 0 0 5px rgba(0, 0, 0, .25);
+        background: url('./images/login-bg.jpg') no-repeat center;
+        background-size: 100% 100%;
         .warning-tips {
             color: red;
             line-height: 34px;

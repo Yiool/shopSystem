@@ -29,10 +29,10 @@ export default {
       // 通过 `vm` 访问组件实例
       // console.log(vm);
       // console.log(vm.$store.state);
-      if(!vm.$store.state.isLogin){
+      /*if(!vm.$store.state.isLogin){
         console.log("没登录");
         vm.$router.push({ path: '/login' });
-      }
+      }*/
     })
   },
 }
