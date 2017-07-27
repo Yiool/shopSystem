@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '../pages/login/Login';
 import page404 from '../pages/404/404';
 import Home from '../pages/home/Home';
+import DeskTop from '../pages/desktop/DeskTop.vue';
 import Staff from '../pages/Staff/Staff';
 import Commodity from '../pages/commodity/Commodity'
 import Order from '../pages/order/Order'
@@ -13,7 +14,7 @@ export default new Router({
     mode: 'history',
     routes: [{
             path: '/',
-            redirect: '/login'
+            redirect: '/home/desktop'
         },
         {
             path: '/login',
@@ -35,6 +36,9 @@ export default new Router({
                 {
                     path: 'order/:type',
                     component: Order
+                }, {
+                    path: 'desktop',
+                    component: DeskTop
                 }
                 /*{
                     path: 'addStaff',
