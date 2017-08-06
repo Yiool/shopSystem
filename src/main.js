@@ -12,6 +12,8 @@ import Pagination from './components/pagination/index.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 
+import './assets/fonts/iconfont.css'
+
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
 Vue.use(Pagination);

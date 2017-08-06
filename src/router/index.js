@@ -11,6 +11,8 @@ import OrdderList from '../pages/order/children/List'
 import AddOrder from '../pages/order/children/Add'
 import CustomerList from  '../pages/customer/children/List'
 import AddCustomer from '../pages/customer/children/Add'
+import GoodsList from '../pages/goods/children/List'
+import AddGoods from '../pages/goods/children/Add'
 import PlaceHolder from '../components/PlaceHodler'
 Vue.use(Router);
 
@@ -50,6 +52,18 @@ const routes = [
                         component:AddCustomer
                     }
 
+                ]
+            },{
+                path:'goods',
+                component:PlaceHolder,
+                children:[
+                    {
+                        path:'list',
+                        component:GoodsList
+                    },{
+                        path:'add',
+                        component:AddGoods
+                    }
                 ]
             }
         ]
