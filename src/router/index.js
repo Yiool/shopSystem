@@ -7,48 +7,61 @@ import DeskTop from '../pages/desktop/DeskTop.vue';
 import Staff from '../pages/Staff/Staff';
 import Commodity from '../pages/commodity/Commodity'
 import Order from '../pages/order/Order'
-
+import OrdderList from '../pages/order/children/List'
+import AddOrder from '../pages/order/children/Add'
+import CustomerList from  '../pages/customer/children/List'
+import AddCustomer from '../pages/customer/children/Add'
+import PlaceHolder from '../components/PlaceHodler'
 Vue.use(Router);
 
+const routes = [
+    {
+        path:'/home',
+        component:Home,
+        children:[
+            {
+                path:'desktop',    //  工作台
+                component:DeskTop
+            },
+            {
+                path:'order',      //订单管理
+                component:PlaceHolder,
+                children:[
+                    {
+                        path:'list',   //订单列表
+                        component:OrdderList
+                    },
+                    {
+                        path:'add',   //开单
+                        component:AddOrder  
+                    }
+                ]
+            },
+            {
+                path:'customer',   // 会员中心
+                component:PlaceHolder,
+                children:[
+                    {
+                        path:'list', //会员列表
+                        component:CustomerList
+                    },
+                    {
+                        path:'add',  // 新增会员
+                        component:AddCustomer
+                    }
+
+                ]
+            }
+        ]
+    },
+    {
+        path:'/',
+        redirect:'/home/desktop'
+    }
+]
+
+
+
 export default new Router({
-    routes: [{
-            path: '/',
-            redirect: '/home'
-        },
-        {
-            path: '/login',
-            name: 'Login',
-            component: Login
-        },
-        {
-            path: '/home',
-            name: "Home",
-            component: Home,
-            children: [{
-                    path: 'staff/:type',
-                    component: Staff,
-                },
-                {
-                    path: 'commodity/:type',
-                    component: Commodity
-                },
-                {
-                    path: 'order/:type',
-                    component: Order
-                }, {
-                    path: 'desktop',
-                    component: DeskTop
-                }
-                /*{
-                    path: 'addStaff',
-                    component: addStaff
-                }*/
-            ]
-        },
-        
-        {
-            path: '*',
-            component: page404
-        }
-    ],
+    routes: routes,
 })

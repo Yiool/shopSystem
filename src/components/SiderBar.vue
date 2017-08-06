@@ -1,36 +1,36 @@
 <template>
   <div>
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-      <el-radio-button :label="false">展开</el-radio-button>
-      <el-radio-button :label="true">收起</el-radio-button>
-    </el-radio-group>
-    <el-menu default-active="/home/staff/list" router="true" class="" theme="light"  mode="vertical" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-      <el-submenu index="/home/staff">
+    <!--<el-radio-group v-model="isCollapse" @change="change(isCollapse)" style="margin-bottom: 20px;">
+      <el-radio-button :label="open">展开</el-radio-button>
+      <el-radio-button :label="close">收起</el-radio-button>
+    </el-radio-group>-->
+    <el-menu default-active="/home/desktop" :router="isRouter" class="" theme="light" mode="vertical" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+      <el-menu-item index="/home/desktop">
+        <i class="el-icon-menu"></i>
+        <span>工作台</span>
+      </el-menu-item>
+      <el-submenu index="/home/order">
         <template slot="title">
           <i class="el-icon-message"></i>
           <span slot="title">订单管理</span>
         </template>
-        <el-menu-item index="/home/staff/list">选项1</el-menu-item>
-        <el-menu-item index="/home/staff/detail">选项2</el-menu-item>
-        <el-menu-item index="/home/staff/add">选项3</el-menu-item>
+        <el-menu-item index="/home/order/list">订单列表</el-menu-item>
       </el-submenu>
-      <el-submenu index="/home/order">
+      <el-submenu index="/home/customer">
         <template slot="title">
           <i class="el-icon-menu"></i>
-          <span slot="title">会员会员</span>
+          <span slot="title">会员管理</span>
         </template>
-          <el-menu-item index="/home/order/list">选项1</el-menu-item>
-          <el-menu-item index="/home/order/detail">选项2</el-menu-item>
-          <el-menu-item index="/home/order/add">选项3</el-menu-item>
+        <el-menu-item index="/home/customer/list">会员列表</el-menu-item>
       </el-submenu>
       <el-submenu index="commodity">
         <template slot="title">
           <i class="el-icon-message"></i>
           <span slot="title">导航导航&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         </template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="3-2">选项2</el-menu-item>
-          <el-menu-item index="3-3">选项3</el-menu-item>
+        <el-menu-item index="3-1">选项1</el-menu-item>
+        <el-menu-item index="3-2">选项2</el-menu-item>
+        <el-menu-item index="3-3">选项3</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -42,8 +42,7 @@ export default {
     return {
       /*menuData: [
         {
-          title: '员工管理',
-          showSubTitle: false,
+          title: '订单管理',
           itemIcon: '',
           path: '/home/staff/all',
           subTitles: [
@@ -91,8 +90,10 @@ export default {
           ]
         }
       ],*/
-      isCollapse: true
-
+      isCollapse: true,
+      isRouter: true,
+      open: true,
+      close: false
     }
   },
   methods: {
@@ -107,6 +108,9 @@ export default {
     },
     handleClose: function (key, keyPath) {
       console.log(key, keyPath);
+    },
+    change: function (v) {
+      console.log(v);
     }
   }
 }
