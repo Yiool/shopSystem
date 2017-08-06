@@ -16,29 +16,6 @@
         </template>
         <el-menu-item v-if="subItem.isShow" v-for="subItem in item.subTitles" :index="subItem.path">{{subItem.title}}</el-menu-item>
       </el-submenu>
-      <!--<el-submenu index="/home/order">
-        <template slot="title">
-          <i class="el-icon-message"></i>
-          <span slot="title">订单管理</span>
-        </template>
-        <el-menu-item index="/home/order/list">订单列表</el-menu-item>
-      </el-submenu>
-      <el-submenu index="/home/customer">
-        <template slot="title">
-          <i class="el-icon-menu"></i>
-          <span slot="title">会员管理</span>
-        </template>
-        <el-menu-item index="/home/customer/list">会员列表</el-menu-item>
-      </el-submenu>
-      <el-submenu index="commodity">
-        <template slot="title">
-          <i class="el-icon-message"></i>
-          <span slot="title">导航导航&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        </template>
-        <el-menu-item index="3-1">选项1</el-menu-item>
-        <el-menu-item index="3-2">选项2</el-menu-item>
-        <el-menu-item index="3-3">选项3</el-menu-item>
-      </el-submenu>-->
     </el-menu>
   </div>
 </template>
@@ -113,12 +90,6 @@ export default {
     }
   },
   methods: {
-    /*showSubTitle: function (i) {
-      this.menuData[i].showSubTitle = !this.menuData[i].showSubTitle;
-    },
-    toggleMenu: function () {
-      this.showFullMenu = !this.showFullMenu;
-    },*/
     handleOpen: function (key, keyPath) {
       console.log(key, keyPath);
     },

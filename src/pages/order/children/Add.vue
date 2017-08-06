@@ -1,5 +1,30 @@
 <template>
   <div>
-    我是新增订单
+    <brand-rumb :links="navLinks"></brand-rumb>
   </div>
-</template>
+</template> 
+
+<script>
+  import brandRumb from '../../../components/BreadCrumb.vue'
+  export default {
+    data(){
+      return {
+        navLinks:[
+          {
+            title:'订单管理',
+            path:'/home/order'
+          },{
+            title:'订单列表',
+            path:'/home/order/list'
+          },{
+            title:'开单',
+            path:'/home/order/add'
+          }
+        ]
+      }
+    },
+    components:{
+      brandRumb
+    }
+  }
+</script>
