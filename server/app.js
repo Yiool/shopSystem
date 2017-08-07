@@ -1,7 +1,14 @@
 var http = require('http')
-var express = require('express')
+var express = require('express');
+var MongoClient = require('mongodb').MongoClient;
 
-var app = express()
+//连接test数据库
+var url = 'mongodb://localhost:27017/test';
+MongoClient.connect(url, (err,db) => {
+    console.log('连接成功');
+    db.close();
+});
+var app = express();
 
 
 var server = require('http').createServer(app);
