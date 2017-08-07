@@ -3,7 +3,7 @@
     <top-bar></top-bar>
     <div class="main-content f-cb">
       <sider-bar class="sider-bar f-fl"></sider-bar>
-      <router-view></router-view>
+      <router-view class="view-container"></router-view>
     </div>
   </div>
 </template>
@@ -35,18 +35,34 @@ export default {
       }*/
     })
   },
+  created(){
+    console.log(this.http);
+  }
 }
 </script>
 
-<style lang="less">
-.sider-box {
-  width: 100px;
+<style lang="less" scoped>
+.window-framework {
+  width: 100%;
   height: 100%;
+  .main-content {
+    height: 100%;
+    padding-top: 80px;
+  }
+}
+
+.sider-bar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  height: 100%;
+  width: 150px;
+  min-height: 100%;
+  background-color: #eef1f6;
 }
 
 .view-container {
-  overflow: hidden;
-  border: 1px solid #eee;
+  padding-left: 150px;
 }
 </style>
 

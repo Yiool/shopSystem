@@ -17,6 +17,7 @@
             </el-form>
         </div>
         <Pagination :pagegation-config="pagegationConfig" ></Pagination>
+        
     </div>
 </template>
 
@@ -68,6 +69,12 @@ export default {
         },
     },
     mounted(){
+        /* DOM 挂载成功后给document绑定键盘事件、实现enter登录 */
+        document.onkeyup=(event)=>{
+            if(event.keyCode === 13){
+                this.login();
+            }
+        };
         this.axios.post('http://localhost:8080?userid=0&type=1').then((res)=>{
             console.log(res.data);
         })

@@ -12,9 +12,14 @@ import Pagination from './components/pagination/index.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 
-Vue.use(ElementUI);
-Vue.use(VueAxios, axios);
-Vue.use(Pagination);
+import ApiConfig from './util/apiRequestHandler'
+
+import './assets/fonts/iconfont.css'
+
+Vue.use(ElementUI); //使用element-ui
+Vue.use(VueAxios, axios); //封装axios
+Vue.use(Pagination); //将分页组件封装成全局组件
+Vue.prototype.http = ApiConfig; // 封装数据后台交互函数
 
 
 Vue.config.productionTip = false
