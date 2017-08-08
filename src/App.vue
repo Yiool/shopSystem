@@ -33,9 +33,13 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 #app {
   width: 100%;
   height: 100%;
+  .windowframe {
+    padding: 20px;
+    // background-color: #d7d7d7;
+  }
 }
 </style>
