@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import data from './util/mock';
+// import data from './util/mock';
 import TopBar from './components/TopBar';
 import SiderBar from './components/SiderBar'
 import { mapState } from 'vuex';

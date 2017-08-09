@@ -1,17 +1,24 @@
-var http = require('http')
-var express = require('express');
-var MongoClient = require('mongodb').MongoClient;
+const http = require('http')
+const express = require('express');
+const router = require('./customer');
+const MongoClient = require('mongodb').MongoClient;
 
+const bodyParser = require('body-parser');
 //连接test数据库
-var url = 'mongodb://localhost:27017/test';
+/*var url = 'mongodb://localhost:27017/test';
 MongoClient.connect(url, (err,db) => {
     console.log('连接成功');
     db.close();
-});
+});*/
 var app = express();
 
 
-var server = require('http').createServer(app);
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+let server = require('http').createServer(app);
 //指定静态文件的位置
 // app.use('/', express.static(__dirname + '/public')); 
 //监听端口号
@@ -36,22 +43,12 @@ app.all('*', function(req, res, next) {
     next();
 })
 
-app.post('/', function(req, res, next) {
-    // console.log(req, res);
-    next();
-})
 
-app.post('/', function(req, res, next) {
-    console.log(req);
-    res.send({
-        code: 0,
-        msg: 'ok',
-        data: {
-            name: 'yg',
-            age: 18
-        }
-    })
-})
+/*app.get('/api/v1/customer/add',function(req,res){
+    console.log(req.body);
+    res.send("123");
+})*/
+app.use('/api/v1',router);
 
 server.listen(8080);
 console.log('create a local server')

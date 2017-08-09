@@ -1,4 +1,4 @@
-import Mock from 'mockjs';
+// import Mock from 'mockjs';
 
 // export default Mock.mock('http://login.cn', {
 //     status: 0,
@@ -6,7 +6,7 @@ import Mock from 'mockjs';
 // });
 
 
-export default Mock.mock('http://login.cn', function(option) {
+/*export default Mock.mock('http://login.cn', function(option) {
     option.body = JSON.parse(option.body);
     if (option.body.username == "admin" && option.body.password == "123456") {
         return {
@@ -20,4 +20,4 @@ export default Mock.mock('http://login.cn', function(option) {
         }
     }
 
-});
+});*/

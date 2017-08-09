@@ -37,7 +37,10 @@
       </div>
       <!-- 表格模块 -->
       <div>
-        <el-button type="primary"><router-link to="/home/customer/add">新增会员</router-link></el-button>
+        <el-button type="primary" >
+          <router-link to="/home/customer/add">新增会员</router-link>
+        </el-button>
+        <button @click="add()">按钮</button>
         <!-- TODO: 表格信息收集、表头设计-->
       </div>
       <!-- 分页模块 -->
@@ -67,7 +70,7 @@ export default {
         data: '',
         startDate: '',
         endDate: '',
-        showDatePicker:false
+        showDatePicker: false
       },
       datePickerConfig: {
         disabledDate(time) {
@@ -84,13 +87,31 @@ export default {
       // console.log(123);
     },
     choiceDate: function (event) {
-      
+
       console.log(123);
       this.searchData.showDatePicker = true;
     },
-
+    add: function () {
+      console.log(new Date());
+      this.axios({
+        url: 'http://localhost:8080/api/v1/customer/add',
+        type: 'get',
+        params: {
+          firstName: 'Fred',
+          lastName: 'Flintstone'
+        },
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
+      })
+      this.axios.post('http://localhost:8080/api/v1/customer/add', {
+        firstName: 'Fred',
+        lastName: 'Flintstone'
+      }).then((response) => {
+        console.log(response);
+        console.log(new Date())
+      })
+    }
   },
-  mounted(){
+  mounted() {
     // console.log(window);
     /*window.onclick = ()=>{
       // console.log(123);
