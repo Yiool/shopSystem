@@ -37,11 +37,12 @@
       </div>
       <!-- 表格模块 -->
       <div>
-        <el-button type="primary" >
+        <el-button type="primary">
           <router-link to="/home/customer/add">新增会员</router-link>
         </el-button>
         <button @click="add()">按钮</button>
         <!-- TODO: 表格信息收集、表头设计-->
+        
       </div>
       <!-- 分页模块 -->
     </div>
@@ -77,6 +78,16 @@ export default {
           return time.getTime() >= Date.now() - 8.64e7;
         }
       },
+      form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
     }
   },
   components: {
@@ -100,7 +111,7 @@ export default {
           firstName: 'Fred',
           lastName: 'Flintstone'
         },
-        headers: {'X-Requested-With': 'XMLHttpRequest'}
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
       })
       this.axios.post('http://localhost:8080/api/v1/customer/add', {
         firstName: 'Fred',

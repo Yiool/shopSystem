@@ -12,8 +12,9 @@ MongoClient.connect(url, (err,db) => {
 });*/
 var app = express();
 
-
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
 
 // parse application/json
 app.use(bodyParser.json())
@@ -34,21 +35,36 @@ http.get(pageUrl, function(res) {
     });
 });*/
 
-app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By", ' 3.2.1')
-    res.header("Content-Type", "application/json;charset=utf-8");
-    next();
+app.all('*', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  /* res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+  res.header("X-Powered-By", ' 3.2.1')
+  res.header("Content-Type", "application/json;charset=utf-8"); */
+  next();
 })
 
 
-/*app.get('/api/v1/customer/add',function(req,res){
+/*
+
+app.get('/api/v1/customer/add',function(req,res){
     console.log(req.body);
     res.send("123");
-})*/
-app.use('/api/v1',router);
+})
+
+*/
+// app.use('/api/v1',router);
+
+app.get('/', function (req, res) {
+
+  console.log(req.body);
+  res.send("ok");
+})
+// http://localhost:8080/api/v1/customer
+app.post('/', function (req, res) {
+  console.log(req.body);
+  res.send('ok');
+})
 
 server.listen(8080);
 console.log('create a local server')
