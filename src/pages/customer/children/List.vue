@@ -105,21 +105,23 @@ export default {
     add: function () {
       console.log(new Date());
       this.axios({
-        url: 'http://localhost:8080/api/v1/customer/add',
+        url: 'http://localhost:8080/api/v1/customer/1',
         type: 'get',
         params: {
           firstName: 'Fred',
           lastName: 'Flintstone'
         },
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      }).then(function(res){
+        console.log(res)
       })
-      this.axios.post('http://localhost:8080/api/v1/customer/add', {
+      /* this.axios.post('http://localhost:8080/api/v1/customer/add', {
         firstName: 'Fred',
         lastName: 'Flintstone'
       }).then((response) => {
         console.log(response);
         console.log(new Date())
-      })
+      }) */
     }
   },
   mounted() {

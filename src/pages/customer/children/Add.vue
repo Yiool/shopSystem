@@ -81,7 +81,7 @@ export default {
       },
       rules: {
         mobile: [
-          { type: 'number', required: true, message: '请输入11位电话号码', trigger: 'blur' }
+          {  required: true, message: '请输入11位电话号码', trigger: 'blur' }
         ],
         pd: [
           {
@@ -104,12 +104,11 @@ export default {
       this.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
       this.axios({
         method: 'post',
-        url: 'http://localhost:8080',
-        data: {
-          firstName: 'Fred',
-          lastName: 'Flintstone'
-        },
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        url: 'http://localhost:8080/api/v1/customer',
+        data:this.form,
+        // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      }).then(function(res){
+        console.log(res);
       });
       /* this.axios({
        url:'http://localhost:8080/api/v1/customer',

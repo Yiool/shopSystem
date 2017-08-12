@@ -5,11 +5,11 @@ const MongoClient = require('mongodb').MongoClient;
 
 const bodyParser = require('body-parser');
 //连接test数据库
-/*var url = 'mongodb://localhost:27017/test';
+/* var url = 'mongodb://localhost:27017/test';
 MongoClient.connect(url, (err,db) => {
-    console.log('连接成功');
+    console.log('连接成功',db);
     db.close();
-});*/
+}); */
 var app = express();
 
 app.use(bodyParser.urlencoded({
@@ -37,10 +37,10 @@ http.get(pageUrl, function(res) {
 
 app.all('*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  /* res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
   res.header("X-Powered-By", ' 3.2.1')
-  res.header("Content-Type", "application/json;charset=utf-8"); */
+  res.header("Content-Type", "application/json;charset=utf-8");
   next();
 })
 
@@ -55,16 +55,18 @@ app.get('/api/v1/customer/add',function(req,res){
 */
 // app.use('/api/v1',router);
 
-app.get('/', function (req, res) {
+/* app.get('/api/v1/customer', function (req, res) {
 
   console.log(req.body);
   res.send("ok");
 })
 // http://localhost:8080/api/v1/customer
-app.post('/', function (req, res) {
+app.post('/api/v1/customer', function (req, res) {
   console.log(req.body);
   res.send('ok');
-})
+}) */
+
+app.use('/api/v1',router);
 
 server.listen(8080);
 console.log('create a local server')
