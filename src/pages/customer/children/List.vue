@@ -103,7 +103,7 @@ export default {
       this.searchData.showDatePicker = true;
     },
     add: function () {
-      console.log(new Date());
+      /* console.log(new Date());
       this.axios({
         url: 'http://localhost:8080/api/v1/customer/1',
         type: 'get',
@@ -114,6 +114,11 @@ export default {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }).then(function(res){
         console.log(res)
+      }) */
+      this.http('customer','list',{id:1}).then(function(res){
+        console.log(res);
+      }).catch(function(err){
+        console.log(err);
       })
       /* this.axios.post('http://localhost:8080/api/v1/customer/add', {
         firstName: 'Fred',

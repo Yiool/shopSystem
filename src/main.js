@@ -6,7 +6,7 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store/index.js'
-
+import _ from 'lodash'
 import Pagination from './components/pagination/index.js'
 
 import ElementUI from 'element-ui'

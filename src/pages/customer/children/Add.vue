@@ -101,43 +101,9 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      this.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-      this.axios({
-        method: 'post',
-        url: 'http://localhost:8080/api/v1/customer',
-        data:this.form,
-        // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      }).then(function(res){
+      this.http('customer','add',this.form).then((res)=>{
         console.log(res);
-      });
-      /* this.axios({
-       url:'http://localhost:8080/api/v1/customer',
-       method:'post',
-       data:{
-         name:'yg',
-         age:"18"
-       }
-     }).then(function(res){
-       console.log(res);
-     })  */
-      /* this.axios.get('http://localhost:8080/api/v1/customer', {
-        params: {
-          name: 'yg',
-          age: '18'
-        }
-
-      }).then(function (res) {
-        console.log(res);
-      }) */
-      /* this.axios({
-        url:'http://localhost:8080',
-        method:'get',
-        params:{
-          id:1
-        }
-      }).then(function(res){
-        console.log(res);
-      }) */
+      })
     }
   }
 }

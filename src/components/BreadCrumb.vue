@@ -1,7 +1,7 @@
 <template>
   <div class="nav-box">
     <el-breadcrumb  :separator="separator">
-      <el-breadcrumb-item  v-for="(item,index) in links" :to="item.path" :keys="index">{{item.title}}</el-breadcrumb-item>
+      <el-breadcrumb-item  v-for="(item,index) in links" :to="item.path" :key="index">{{item.title}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>

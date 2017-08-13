@@ -25,7 +25,7 @@ const API_CONFIG = {
     },
     customer: {
         list: {
-            url: '',
+            url: '/customer',
             type: 'get'
         },
         detail: {
@@ -33,7 +33,7 @@ const API_CONFIG = {
             type: 'get'
         },
         add: {
-            url: '',
+            url: '/customer',
             type: 'post'
         }
     },

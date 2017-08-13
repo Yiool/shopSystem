@@ -9,12 +9,12 @@
         <i class="el-icon-menu"></i>
         <span>工作台</span>
       </el-menu-item>
-      <el-submenu v-for="item in menuData" :index="item.path">
+      <el-submenu v-for="(item,index) in menuData" :index="item.path" :key="index">
         <template slot="title">
           <i :class="item.itemIcon"></i>
           <span slot="title">{{item.title}}</span>
         </template>
-        <el-menu-item v-if="subItem.isShow" v-for="subItem in item.subTitles" :index="subItem.path">{{subItem.title}}</el-menu-item>
+        <el-menu-item v-if="subItem.isShow" v-for="(subItem,i) in item.subTitles" :index="subItem.path" :key='i'>{{subItem.title}}</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
