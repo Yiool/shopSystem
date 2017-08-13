@@ -1,25 +1,25 @@
 const API_CONFIG = {
     home: {
         login: {
-            url: '',
+            url: '/login',
             type: 'post'
         },
         regist: {
-            url: '',
+            url: '/regist',
             type: 'post'
         }
     },
     order: {
         list: {
-            url: '',
+            url: '/order',
             type: 'get'
         },
         detail: {
-            url: '',
+            url: '/order',
             type: 'get'
         },
         add: {
-            url: '',
+            url: '/order',
             type: 'post'
         }
     },
@@ -29,7 +29,7 @@ const API_CONFIG = {
             type: 'get'
         },
         detail: {
-            url: '',
+            url: '/customer',
             type: 'get'
         },
         add: {
@@ -39,15 +39,15 @@ const API_CONFIG = {
     },
     goods: {
         list: {
-            url: '',
+            url: '/goods',
             type: 'get'
         },
         detail: {
-            url: '',
+            url: '/goods',
             type: 'get'
         },
         add: {
-            url: '',
+            url: '/goods',
             type: 'post'
         }
     }

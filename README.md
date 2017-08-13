@@ -1,6 +1,12 @@
 # vue-stystem
 
-> A Vue.js project
+> A Vue.js project  针对中小型眼镜店铺后台管理系统
+
+> 前端：Vue: "^2.3.3", vue-router: "^2.3.1",vuex: "^2.3.1" ,element-ui: "^1.3.7",axios: "^0.16.2"
+
+> 后端：node： "^6.10.2",express:"^4.14.1"
+
+> 数据库：mogodb
 
 ## Build Setup
 
