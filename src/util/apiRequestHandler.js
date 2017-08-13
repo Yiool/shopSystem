@@ -22,7 +22,7 @@ const apiRequestHandler = function (parent, current, dataConfig) {
      * 默认请求参数（针对分页）
      * 1.page  第几页 默认为1
      * 2.pagesize  一页返回多少数量的信息 默认为10
-     * 3.t 请求时间戳、防止浏览器缓存，保证获取到最新数据
+     * 3.t 请求时间戳、防止浏览器缓存，保证获取到最新数据  
      */
     let DEFAULT_PARAMS = {
       page: 1,   

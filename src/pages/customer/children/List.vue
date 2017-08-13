@@ -36,23 +36,23 @@
         </div>
       </div>
       <!-- 表格模块 -->
-      <div>
+      <div class="tableModule">
         <el-button type="primary">
           <router-link to="/home/customer/add">新增会员</router-link>
         </el-button>
         <!-- <button @click="add()">按钮</button> -->
         <!-- TODO: 表格信息收集、表头设计-->
-        <el-table :data="tableData" stripe style="width: 100%">
-          <el-table-column label="姓名">
+        <el-table class="m-table" :data="tableData" stripe style="width: 100%">
+          <el-table-column label="姓名" width="120">
             <template scope="scope">
-              <span>{{ scope.row.name.slice(1)}}</span>
-              <!-- <span>{{scope.row.name}}</span> -->
+              <span class="avatar">{{ scope.row.name.substr(0,1)}}</span>
+               <span>{{scope.row.name}}</span> 
             </template>
           </el-table-column>
-          <el-table-column prop="mobile" label="电话">
+          <el-table-column width="180" prop="mobile" label="电话">
           </el-table-column>
-          <el-table-column prop="profession" label="职业">
-          </el-table-column>
+          <!-- <el-table-column prop="profession" label="职业">
+          </el-table-column> -->
           <el-table-column label="左眼视力">
             <template scope="scope">
               <!-- {{scope.row.leftEyes.DS}} -->
@@ -79,7 +79,7 @@
           </el-table-column>
           <el-table-column prop="staff" label="经办人">
           </el-table-column>
-          <el-table-column label="操作" width="">
+          <el-table-column label="操作" width="180">
             <template scope="scope">
               <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
               <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
@@ -208,24 +208,8 @@ export default {
       this.searchData.showDatePicker = true;
     },
     add: function () {
-      /* console.log(new Date());
-      this.axios({
-        url: 'http://localhost:8080/api/v1/customer/1',
-        type: 'get',
-        params: {
-          firstName: 'Fred',
-          lastName: 'Flintstone'
-        },
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      }).then(function(res){
-        console.log(res)
-      }) */
-      let _this = this;
-      setTimeout(() => {
-        setInterval(() => {
-          _this.progress++;
-        }, 1000)
-      }, 2000)
+      
+      
       this.http('customer', 'list', { id: 1 }).then(function (res) {
         console.log(res);
       }).catch(function (err) {
@@ -270,6 +254,21 @@ export default {
       .date-picker {
         margin-top: -10px;
         margin-left: 20px;
+      }
+    }
+  }
+  .tableModule {
+    .m-table {
+      .avatar {
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        margin-right: 10px;
+        text-align: center;
+        line-height: 26px;
+        border-radius: 50%;
+        background-color: #d7d7d7;
+        color: #f1f1f1;
       }
     }
   }
