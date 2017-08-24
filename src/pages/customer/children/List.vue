@@ -23,7 +23,7 @@
             <span class="input-label f-fl">办理时间:</span>
             <el-radio-group class="f-fl f-cb" v-model="searchData.data">
               <el-radio class="f-fl" label='all'>全部</el-radio>
-              <el-radio class="f-fl" @click.native="choiceDate">自定义</el-radio>
+              <el-radio class="f-fl" @click.native.stop="choiceDate">自定义</el-radio>
               <div class="date-picker f-fl" v-if="searchData.showDatePicker">
                 <el-date-picker v-model="searchData.startDate" type="date" placeholder="选择起始日期" :picker-options="datePickerConfig">
                 </el-date-picker>
@@ -46,7 +46,7 @@
           <el-table-column label="姓名" width="120">
             <template scope="scope">
               <span class="avatar">{{ scope.row.name.substr(0,1)}}</span>
-               <span>{{scope.row.name}}</span> 
+               <span>{{scope.row.name}}</span>
             </template>
           </el-table-column>
           <el-table-column width="180" prop="mobile" label="电话">
@@ -81,7 +81,7 @@
           </el-table-column>
           <el-table-column label="操作" width="180">
             <template scope="scope">
-              <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <el-button v-modal size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
               <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
@@ -89,7 +89,7 @@
       </div>
       <!-- 分页模块 -->
     </div>
-  
+
   </div>
 </template>
 
@@ -208,8 +208,8 @@ export default {
       this.searchData.showDatePicker = true;
     },
     add: function () {
-      
-      
+
+
       this.http('customer', 'list', { id: 1 }).then(function (res) {
         console.log(res);
       }).catch(function (err) {
@@ -224,8 +224,22 @@ export default {
       }) */
     }
   },
+  directives:{
+    modal:{
+      bind: (el)=>{
+        el.onmouseenter = function(){
+          console.log(1234);
+        }
+      }
+    }
+  },
+  mounted(){
+    document.body.onclick = ()=>{
+      this.searchData.showDatePicker = false;
+    }
+  },
   activated() {
-    this.http('customer','list',{page:1,pagesize:1,t:new Date().getTime()});
+    // this.http('customer','list');
     // console.log(window);
     /*window.onclick = ()=>{
       // console.log(123);
