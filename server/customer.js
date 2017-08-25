@@ -28,7 +28,7 @@ router.get('/customer', function(req, res) {
     //1. 页码page
     //2. 每页条数pagesize
     //3. 会员等级 grade
-    //4. 创建时间 createtime
+    //4. 创建时间(Unix时间戳) createtime
     //5. 排序
     console.log(req.body);
     res.send(req.body);
