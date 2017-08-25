@@ -75,6 +75,7 @@
   | 字段     | 类型      | 必填      | 说明
   | ----    | ----      | ----      | ----
   | userid  | number    | true      | 会员唯一id
+  |
 
 
 #### 会员列表
@@ -93,6 +94,7 @@
   | page     | string    | true      | 页码，第几页
   | pagesize | string    | true      | 每页多少条数据
   | grade    | string    | false     | 会员等级
+  |
 
 * 响应结果(response result)
 
@@ -101,6 +103,7 @@
   | status   | string    | true      | 返回状态  '0' 成功 '1' 失败
   | data     | array     | true      | 返回数据  所有会员信息
   | totalCount | number  | true      | 数据总条数
+  |
 
 * 响应数据(data)
   | 字段      | 类型      | 必填      | 说明
@@ -116,6 +119,8 @@
   | remark    | string   | false     | 备注信息
   | grade     | string   | false     | 会员等级
   | staff     | string   | false     | 经办人
+  |
+
 
 
 #### 编辑某个会员信息
