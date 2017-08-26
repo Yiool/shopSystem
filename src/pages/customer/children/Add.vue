@@ -37,15 +37,15 @@
         <el-form-item label="镜架" prop="镜架">
           <el-input class="input-w-180" v-model="form.mirrorBracket" placeholder="请输入镜架品牌"></el-input>
         </el-form-item>
-        <el-form-item label="镜片  " prop="镜片">
+        <el-form-item label="镜片" prop="镜片">
           <el-input class="input-w-180" v-model="form.optic" placeholder="请输入镜片品牌"></el-input>
         </el-form-item>
         <el-form-item label="备注">
           <el-input class="input-w-180" v-model="form.remark" placeholder="请输入备注"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
-          <el-button>取消</el-button>
+          <el-button type="primary" @click="onSubmit()">立即创建</el-button>
+          <el-button type="primary" @click="goBack()">返&nbsp;&nbsp;&nbsp;&nbsp;回</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -103,7 +103,19 @@ export default {
     onSubmit: function () {
       this.http('customer','add',this.form).then((res)=>{
         console.log(res);
+        this.$message({
+          message: '添加成功',
+          type: 'success'
+        }).catch((err)=>{
+          this.$message({
+          message: 'error',
+          type: 'success'
+        });
+        });
       })
+    },
+    goBack:function(){
+      this.$router.push({path:'/home/customer/list'})
     }
   }
 }

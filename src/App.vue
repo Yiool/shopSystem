@@ -38,7 +38,7 @@ export default {
   width: 100%;
   height: 100%;
   .windowframe {
-    padding: 20px;
+    padding: 20px 30px;
     // background-color: #d7d7d7;
   }
 }

@@ -88,6 +88,9 @@
         </el-table>
       </div>
       <!-- 分页模块 -->
+      <div>
+         <!-- <Pagination :pagegationConfig=""></Pagination>  -->
+      </div>
     </div>
   
   </div>
@@ -192,7 +195,7 @@ export default {
         creatTime: '2017-08-13',
         staff: 'yg'
       }],
-      progress: 0
+      
     }
   },
   components: {
@@ -206,26 +209,12 @@ export default {
 
       console.log(123);
       this.searchData.showDatePicker = true;
-    },
-    add: function () {
-      
-      
-      this.http('customer', 'list', { id: 1 }).then(function (res) {
-        console.log(res);
-      }).catch(function (err) {
-        console.log(err);
-      })
-      /* this.axios.post('http://localhost:8080/api/v1/customer/add', {
-        firstName: 'Fred',
-        lastName: 'Flintstone'
-      }).then((response) => {
-        console.log(response);
-        console.log(new Date())
-      }) */
     }
   },
   activated() {
-    this.http('customer','list',{page:1,pagesize:1,t:new Date().getTime()});
+    this.http('customer','list',{}).then((res)=>{
+      console.log(res);
+    });
     // console.log(window);
     /*window.onclick = ()=>{
       // console.log(123);
@@ -258,7 +247,13 @@ export default {
     }
   }
   .tableModule {
+    button {
+        a {
+          color:#fff;
+        }
+      }
     .m-table {
+      margin-top: 20px;
       .avatar {
         display: inline-block;
         width: 26px;
