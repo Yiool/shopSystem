@@ -26,7 +26,7 @@
         <el-form-item label="左眼视力">
         </el-form-item>
         <el-form-item label="右眼视力">
-  
+
         </el-form-item>
         <el-form-item label="PD" prop="pd">
           <el-input class="input-w-180" v-model="form.pd" placeholder="请输入PD"></el-input>
@@ -44,8 +44,13 @@
           <el-input class="input-w-180" v-model="form.remark" placeholder="请输入备注"></el-input>
         </el-form-item>
         <el-form-item>
+<<<<<<< HEAD
           <el-button type="primary" @click="onSubmit()">立即创建</el-button>
           <el-button type="primary" @click="goBack()">返&nbsp;&nbsp;&nbsp;&nbsp;回</el-button>
+=======
+          <el-button type="primary" @click="onSubmit">立即创建</el-button>
+          <el-button type="primary" @click="goBack()">取消</el-button>
+>>>>>>> 1868923cf45cc41eff507e770e97d4f2ed8f2ae8
         </el-form-item>
       </el-form>
     </div>
@@ -115,7 +120,12 @@ export default {
       })
     },
     goBack:function(){
+<<<<<<< HEAD
       this.$router.push({path:'/home/customer/list'})
+=======
+      console.log(this);
+      this.$router.push({path:'/home/customer/list'});
+>>>>>>> 1868923cf45cc41eff507e770e97d4f2ed8f2ae8
     }
   }
 }
