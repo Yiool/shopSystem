@@ -8,11 +8,7 @@
     "dev": "node build/dev-server.js && node server/app.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-<<<<<<< HEAD
     "server":"pm2 start server/app.js"
-=======
-    "server": "pm2 start server/app.js"
->>>>>>> 1868923cf45cc41eff507e770e97d4f2ed8f2ae8
   },
   "dependencies": {
     "element-ui": "^1.3.7",

@@ -22,6 +22,9 @@ export default {
   },
   components: {
     brandRumb
+  },
+  created(){
+    console.log('goods-init');
   }
 }
 </script>

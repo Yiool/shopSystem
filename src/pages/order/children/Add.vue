@@ -2,10 +2,10 @@
   <div>
     <brand-rumb :links="navLinks"></brand-rumb>
     <!-- 查询模块 -->
-    <div class="search-part">
+    <!-- <div class="search-part">
       <el-input :placeholder="searchData.placeholder" icon="search" v-model="searchData.searchContent" :on-icon-click="handleIconClick">
       </el-input>
-    </div>
+    </div> -->
   </div>
 </template>
 

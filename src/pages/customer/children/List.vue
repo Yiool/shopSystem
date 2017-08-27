@@ -11,16 +11,15 @@
         </div>
         <div class="search-condition">
           <div class="form-group f-cb">
-            <span class="input-label f-fl">会员等级:</span>
+            <span class="input-label f-fl">会员等级：</span>
             <el-radio-group class="f-fl" v-model="searchData.grade">
               <el-radio>全部</el-radio>
               <el-radio :label="3">普通会员</el-radio>
-              <el-radio :label="6">黄金会员</el-radio>
-              <el-radio :label="9">铂金会员</el-radio>
+              <el-radio :label="6">VIP会员</el-radio>
             </el-radio-group>
           </div>
           <div class="form-group f-cb">
-            <span class="input-label f-fl">办理时间:</span>
+            <span class="input-label f-fl">办理时间：</span>
             <el-radio-group class="f-fl f-cb" v-model="searchData.data">
               <el-radio class="f-fl" label='all'>全部</el-radio>
               <el-radio class="f-fl" @click.native.stop="choiceDate">自定义</el-radio>
@@ -36,12 +35,10 @@
         </div>
       </div>
       <!-- 表格模块 -->
-      <div class="tableModule">
+      <div class="m-table">
         <el-button type="primary">
           <router-link to="/home/customer/add">新增会员</router-link>
         </el-button>
-        <!-- <button @click="add()">按钮</button> -->
-        <!-- TODO: 表格信息收集、表头设计-->
         <el-table class="m-table" :data="tableData" stripe style="width: 100%">
           <el-table-column label="姓名" width="120">
             <template scope="scope">
@@ -49,47 +46,41 @@
                <span>{{scope.row.name}}</span>
             </template>
           </el-table-column>
-          <el-table-column width="180" prop="mobile" label="电话">
+          <el-table-column width="130" prop="mobile" label="电话">
+          </el-table-column>
+          <el-table-column width="100" prop="grade" label="会员等级">
           </el-table-column>
           <!-- <el-table-column prop="profession" label="职业">
           </el-table-column> -->
-          <el-table-column label="左眼视力">
-            <template scope="scope">
-              <!-- {{scope.row.leftEyes.DS}} -->
-              <span style="margin-left: 10px">{{ scope.row.leftEyes.DS }}</span>
-              <span style="margin-left: 10px">{{ scope.row.leftEyes.DC }}</span>
-              <span style="margin-left: 10px">{{ scope.row.leftEyes.AX }}</span>
-              <span style="margin-left: 10px">{{ scope.row.leftEyes.VA }}</span>
-            </template>
+          <el-table-column width="180" prop="orderCount" label="累计订单数">
+          
           </el-table-column>
-          <el-table-column label="右眼视力">
-            <template scope="scope">
-              {{scope.row.rightEyes.DS}}
-              <!-- <span style="margin-left: 10px">{{ scope.row.rightEyes.DS }}</span>
-                <span style="margin-left: 10px">{{ scope.row.rightEyes.DC }}</span>
-                <span style="margin-left: 10px">{{ scope.row.rightEyes.AX }}</span>
-                <span style="margin-left: 10px">{{ scope.row.rightEyes.VA }}</span> -->
-            </template>
+          <el-table-column width="180" prop="moneyCount" label="累计订单金额">
+    
           </el-table-column>
-          <el-table-column prop="pd" label="PD">
-          </el-table-column>
-          <el-table-column prop="add" label="ADD">
-          </el-table-column>
-          <el-table-column prop="creatTime" label="办理时间">
+          
+          <el-table-column width="150" prop="creatTime" label="办理时间">
           </el-table-column>
           <el-table-column prop="staff" label="经办人">
           </el-table-column>
-          <el-table-column label="操作" width="180">
+          <el-table-column label="操作" width="200">
             <template scope="scope">
               <el-button v-modal size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <el-button v-modal size="small" @click="handleEdit(scope.$index, scope.row)">详情</el-button>
               <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
       </div>
       <!-- 分页模块 -->
-      <div>
+      <div class="m-pagination f-fr">
          <!-- <Pagination :pagegationConfig=""></Pagination>  -->
+         <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page="1"
+          layout="total, prev, pager, next, jumper"
+          :total="400">
+        </el-pagination>
       </div>
     </div>
 
@@ -135,9 +126,11 @@ export default {
         desc: ''
       },
       tableData: [{
-        name: '王小虎',
+        name: 'Yiool',
         mobile: '13554407111',
         profession: '上海市普陀区金沙江路 1518 弄',
+        moneyCount:'10000',
+        orderCount:'2',
         leftEyes: {
           DS: '+1.25',
           DC: '-1.25',
@@ -153,11 +146,14 @@ export default {
         pd: '64',
         ADD: '32.5',
         creatTime: '2017-08-13',
-        staff: 'yg'
+        staff: 'yg',
+        grade:'VIP会员'
       }, {
-        name: '王小虎',
+        name: 'Yiool',
         mobile: '13554407111',
         profession: '上海市普陀区金沙江路 1518 弄',
+        moneyCount:'10000',
+        orderCount:'2',
         leftEyes: {
           DS: '+1.25',
           DC: '-1.25',
@@ -173,11 +169,14 @@ export default {
         pd: '64',
         ADD: '32.5',
         creatTime: '2017-08-13',
-        staff: 'yg'
+        staff: 'yg',
+        grade:'VIP会员'
       }, {
-        name: '王小虎',
+        name: 'Yiool',
         mobile: '13554407111',
         profession: '上海市普陀区金沙江路 1518 弄',
+        moneyCount:'10000',
+        orderCount:'2',
         leftEyes: {
           DS: '+1.25',
           DC: '-1.25',
@@ -193,7 +192,56 @@ export default {
         pd: '64',
         ADD: '32.5',
         creatTime: '2017-08-13',
-        staff: 'yg'
+        staff: 'yg',
+        grade:'VIP会员'
+      },
+      {
+        name: 'Yiool',
+        mobile: '13554407111',
+        profession: '上海市普陀区金沙江路 1518 弄',
+        moneyCount:'10000',
+        orderCount:'2',
+        leftEyes: {
+          DS: '+1.25',
+          DC: '-1.25',
+          AX: '85',
+          VA: '0.9'
+        },
+        rightEyes: {
+          DS: '+1.25',
+          DC: '-1.25',
+          AX: '85',
+          VA: '0.9'
+        },
+        pd: '64',
+        ADD: '32.5',
+        creatTime: '2017-08-13',
+        staff: 'yg',
+        grade:'VIP会员'
+      },
+      {
+        name: 'Yiool',
+        mobile: '13554407111',
+        profession: '上海市普陀区金沙江路 1518 弄',
+        moneyCount:'10000',
+        orderCount:'2',
+        leftEyes: {
+          DS: '+1.25',
+          DC: '-1.25',
+          AX: '85',
+          VA: '0.9'
+        },
+        rightEyes: {
+          DS: '+1.25',
+          DC: '-1.25',
+          AX: '85',
+          VA: '0.9'
+        },
+        pd: '64',
+        ADD: '32.5',
+        creatTime: '2017-08-13',
+        staff: 'yg',
+        grade:'VIP会员'
       }],
       
     }
@@ -204,6 +252,9 @@ export default {
   methods: {
     handleIconClick: function () {
       // console.log(123);
+    },
+    handleCurrentChange:function(val){
+      console.log(val);
     },
     choiceDate: function (event) {
 
@@ -220,19 +271,18 @@ export default {
       }
     }
   },
+  created(){
+    console.log('customer-init');
+  },
   mounted(){
     document.body.onclick = ()=>{
       this.searchData.showDatePicker = false;
     }
   },
   activated() {
-<<<<<<< HEAD
     this.http('customer','list',{}).then((res)=>{
       console.log(res);
     });
-=======
-    // this.http('customer','list');
->>>>>>> 1868923cf45cc41eff507e770e97d4f2ed8f2ae8
     // console.log(window);
     /*window.onclick = ()=>{
       // console.log(123);
@@ -264,7 +314,7 @@ export default {
       }
     }
   }
-  .tableModule {
+  .m-table {
     button {
         a {
           color:#fff;
@@ -274,16 +324,19 @@ export default {
       margin-top: 20px;
       .avatar {
         display: inline-block;
-        width: 26px;
-        height: 26px;
+        width: 20px;
+        height: 20px;
         margin-right: 10px;
         text-align: center;
-        line-height: 26px;
+        line-height: 20px;
         border-radius: 50%;
         background-color: #d7d7d7;
         color: #f1f1f1;
       }
     }
+  }
+  .m-pagination {
+    margin:20px 20px 0 0;
   }
 }
 </style>

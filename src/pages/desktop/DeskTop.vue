@@ -10,6 +10,9 @@
             return {
 
             }
+        },
+        created(){
+            console.log('desktop-init');
         }
     }
 </script>

@@ -34,6 +34,11 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
    this.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 ``` 
 
+2. 组件生命周期
+场景：新增一个会员后返回会员列表页，然后再次进入新增页面，输入框中的数据依然存在；
+原因分析：第一次进入新增会员页面组件时会触发` created `生命周期，初始化一个新实例，然后该组件Vue实例上挂载的数据便会被缓存，再次进入时便不会再次初始化新实例而是使用缓存中的数据；
+解决方法：新增页面数据提交成功后调用 ` $destory() ` 方法，手动销毁该组件，确保每次进入该组件都会重新初始化该组件。
+
 ### 后台
 1. 要解析请求中携带的参数、需使用express中间件body-parser，其中路径信息保存在 ` req.url ` 中； ` params ` 信息保存在 `req.params` 中；` query` 查询参数保存在  `req.query` 中。能获取到上述参数后便可以获取这些参数、进行针对性操作
 

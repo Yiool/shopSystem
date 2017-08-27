@@ -22,6 +22,9 @@
     },
     components:{
       brandRumb
+    },
+    created(){
+      console.log('order-init');
     }
   }
 </script>
