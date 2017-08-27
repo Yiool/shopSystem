@@ -35,6 +35,7 @@
         </div>
       </div>
       <!-- 表格模块 -->
+      
       <div class="m-table">
         <el-button type="primary">
           <router-link to="/home/customer/add">新增会员</router-link>
@@ -43,7 +44,14 @@
           <el-table-column label="姓名" width="120">
             <template scope="scope">
               <span class="avatar">{{ scope.row.name.substr(0,1)}}</span>
-               <span>{{scope.row.name}}</span>
+              <!-- <span v-popover:customerInfo>{{scope.row.name}}</span> -->
+              <el-popover placement="bottom-start" trigger="hover">
+                <div>
+                  <p>年龄：18</p>
+                  <p>职业：coder</p>
+                </div>
+                <span slot="reference" class="s-link">{{scope.row.name}}</span>
+              </el-popover>
             </template>
           </el-table-column>
           <el-table-column width="130" prop="mobile" label="电话">
@@ -63,7 +71,7 @@
           </el-table-column>
           <el-table-column prop="staff" label="经办人">
           </el-table-column>
-          <el-table-column label="操作" width="200">
+          <el-table-column label="操作" width="200">  
             <template scope="scope">
               <el-button v-modal size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
               <el-button v-modal size="small" @click="handleEdit(scope.$index, scope.row)">详情</el-button>
@@ -83,7 +91,7 @@
         </el-pagination>
       </div>
     </div>
-
+    
   </div>
 </template>
 
@@ -333,10 +341,14 @@ export default {
         background-color: #d7d7d7;
         color: #f1f1f1;
       }
+      .s-link {
+        color:#038ae3;
+        cursor: pointer;
+      }
     }
   }
   .m-pagination {
-    margin:20px 20px 0 0;
+    margin:20px 20px 20px 0;
   }
 }
 </style>
