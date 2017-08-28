@@ -49,24 +49,44 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 
 ### 数据库
-> 数据库采用mongoDB 引入Node.js的MongoDB对象建模工具Mongoose。schema是mongoose里会用到的一种数据模式，可以理解为表结构的定义
+> 数据库采用mongoDB 引入Node.js的MongoDB对象建模工具Mongoose。schema是mongoose里会用到的一种数据模式，可以理解为表结构的定义。schema中以键值对的形式,定义数据库中每个字段的类型、默认值、是否必填等参数
 
-1. UserSchema (会员信息)
+1. 用户schema
 
-var UserSchema = new Schema({
-  userid:{
-    type:ObjectId,
-    required:true
-  },
-})
+| Field | Type | Reqiured | Default | explanation
+| ---- | ---- | ---- | ---- | ----
+| uid  | number | true  | | 用户唯一id
+| uname | string | true | | 用户名
+| pword | string | true | | 用户密码
+| role | string | true  | | 用户角色 店长为0 店员为1
+ 
 
-| 字段     | 数据类型 |  是否必填 | 说明
-| ---- | ---- | ---- | ----
-| userid   | number  | true     | 主键 会员唯一id
-| username | string  | false    | 会员名称
-| gender   | number  | false    | 会员性别 0-男 1-女
-| profession| string | false    | 会员职业
-| grade    | number  | true     | 会员类型 0-普通会员 1-VIP会员 默认为0
-| mobile   | number  | true     | 会员电话 客户端唯一标识
-| age      | number  | false    | 会员年龄
+2. 角色schema
+
+| Field | Type | Reqiured | Default | explanation
+| ---- | ---- | ---- | ---- | ---- | ----
+| role | string | true | | 角色名称 0 or 1 
+| permission | string | true | | 权限等级 0 or 1
+
+3. 权限schema
+
+| Field | Type | Reqiured | Default | explanation
+| ---- | ---- | ---- | ---- | ---- | ----
+| permission | array | true | | 权限等级对应的权限列表
+
+***
+
+
+4. 会员schema
+
+| Field | Type | Reqiured | Default | explanation
+| ---- | ---- | ---- | ---- | ---- | ----
+| userid   | number  | true  |   | 主键 会员唯一id
+| username | string  | false |   | 会员名称
+| gender   | number  | false |   | 会员性别 0-男 1-女
+| profession| string | false |   | 会员职业
+| grade    | number  | true  | 0   | 会员类型 0-普通会员 1-VIP会员 默认为0
+| mobile   | number  | true  |   | 会员电话 客户端唯一标识
+| age      | number  | false |   | 会员年龄
+
 

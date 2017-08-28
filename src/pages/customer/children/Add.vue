@@ -274,7 +274,7 @@ export default {
     goBack:function(){
       console.log(this);
       this.$destroy();
-      this.$router.push({path:'/home/customer/list'});
+      this.$router.push({path:'/home/customer/list/1'});
     },
     saveData:function(callBack){
       this.http('customer','add',this.form).then((res)=>{
