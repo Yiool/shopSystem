@@ -22,6 +22,7 @@ Vue.use(Router);
 const routes = [{
         path: '/home',
         component: Home,
+        redirect:'/home/desktop',
         children: [{
                 path: 'desktop', //  工作台
                 component: DeskTop
