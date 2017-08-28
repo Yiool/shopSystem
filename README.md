@@ -6,7 +6,9 @@
 
 > 后端：node： "^6.10.2",express:"^4.14.1"
 
-> 数据库：mogodb
+> 数据库：mogodb,  mongoose: "^4.11.6",
+
+> 其它插件、工具库 ：lodash ："^4.17.4" ，echarts："^3.7.0"
 
 ## Build Setup
 
@@ -67,16 +69,16 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 2. 角色schema
 
 | Field | Type | Reqiured | Default | explanation
-| ---- | ---- | ---- | ---- | ---- | ----
+| ---- | ---- | ---- | ---- | ---- 
 | _id  | ObjectId | true | | 
 | role | string | true | | 角色名称 0 or 1 
 | permission | string | true | | 权限等级 0 or 1
 
 3. 权限schema
 
-| Field | Type | Reqiured | Default | explanation
-| ---- | ---- | ---- | ---- | ---- | ----
-| _id  | ObjectId | true | | 
+| Field | Type    | Reqiured | Default | explanation
+| ---- | ----     | ---- | ---- | ---- 
+| _id  | ObjectId | true |      | 
 | permission | array | true | | 权限等级对应的权限列表
 
 ***
@@ -85,7 +87,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 4. 会员schema
 
 | Field | Type | Reqiured | Default | explanation
-| ---- | ---- | ---- | ---- | ---- | ----
+| ----     | ----    | ----  | ---- | ---- 
 | userid   | number  | true  |   | 主键 会员唯一id
 | username | string  | false |   | 会员名称
 | gender   | number  | false |   | 会员性别 0-男 1-女
