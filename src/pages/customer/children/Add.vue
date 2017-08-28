@@ -72,8 +72,8 @@
               <el-input class="input-w-180" v-model="form.leftEye.BD" placeholder="请输入"></el-input>
             </el-form-item>
           </div>
-          
-          
+
+
           <h3>右眼视力</h3>
           <div class="right-eye">
             <el-form-item label="球镜：">
@@ -97,7 +97,7 @@
             <el-form-item label="棱镜：">
               <el-input class="input-w-180" v-model="form.rightEye.LJ" placeholder="请输入"></el-input>
             </el-form-item>
-            <el-form-item label="基底："> 
+            <el-form-item label="基底：">
               <el-input class="input-w-180" v-model="form.rightEye.BD" placeholder="请输入"></el-input>
             </el-form-item>
           </div>
@@ -105,12 +105,12 @@
           </el-form-item>
           <el-form-item label="右眼视力">
           </el-form-item> -->
-          
+
           <!-- <el-form-item label="ADD" prop="add">
             <el-input class="input-w-180" v-model="form.add" placeholder="请输入ADD"></el-input>
           </el-form-item> -->
           <el-form-item class="form-footer">
-            <el-button type="primary" @click="step = 0">上一步</el-button>            
+            <el-button type="primary" @click="step = 0">上一步</el-button>
             <el-button type="primary" @click="toThirdStep('form')">下一步</el-button>
           </el-form-item>
         </el-form>
@@ -144,10 +144,10 @@
             <el-button type="primary" @click="step = 1">上一步</el-button>
             <el-button type="primary" @click="onSubmit()">立即创建</el-button>
             <el-button type="primary" @click="submitAndCreatOrder()">创建并开单</el-button>
-            <el-button type="primary" @click="goBack()">返&nbsp;&nbsp;&nbsp;&nbsp;回</el-button> 
+            <el-button type="primary" @click="goBack()">返&nbsp;&nbsp;&nbsp;&nbsp;回</el-button>
         </el-form-item>
         </el-form>
-      </div>  
+      </div>
     </div>
   </div>
 </template>
@@ -164,7 +164,7 @@ export default {
           path: '/home/customer'
         }, {
           title: '会员列表',
-          path: '/home/customer/list'
+          path: '/home/customer/list/1'
         }, {
           title: '新增会员',
           path: '/home/customer/add'
@@ -206,7 +206,7 @@ export default {
         mirrorBracketBrand: '',  //镜架品牌
         mirrorBracketType:'',    //镜架类型
         opticBrand: '',          //镜片品牌
-        opticType:'',            //镜片类型 
+        opticType:'',            //镜片类型
         remark: '',              //备注信息
       },
       rules: {
@@ -266,14 +266,14 @@ export default {
           });
         });
     },
-    submitAndCreatOrder:function(){ 
+    submitAndCreatOrder:function(){
       this.saveData(()=>{
         this.$router.push({path:'/home/order/add'});
       })
     },
     goBack:function(){
       console.log(this);
-      this.$destroy(); 
+      this.$destroy();
       this.$router.push({path:'/home/customer/list'});
     },
     saveData:function(callBack){

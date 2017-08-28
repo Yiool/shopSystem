@@ -30,9 +30,9 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 ##开发注意事项：
 ### 前端
 1. 对http网络请求知识了解的不够深,项目中使用axios发送post携带参数,前端报错 ` XMLHttpRequest cannot load http://localhost:8080/api/v1/customer. Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response. `  大致意思为没有设置有效的请求头，解决办法是在axios全局设置中添加请求头设置：
-```   
+```
    this.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-``` 
+```
 
 2. 组件生命周期
 
@@ -43,8 +43,30 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
     解决方法：新增页面数据提交成功后调用 ` $destory() ` 方法，手动销毁该组件，确保每次进入该组件都会重新初始化该组件。
 
 ### 后台
+后端api文档请移步至：[API_DOC.md](./API_DOC.md)
+
 1. 要解析请求中携带的参数、需使用express中间件body-parser，其中路径信息保存在 ` req.url ` 中； ` params ` 信息保存在 `req.params` 中；` query` 查询参数保存在  `req.query` 中。能获取到上述参数后便可以获取这些参数、进行针对性操作
 
 
-### 数据库 
+### 数据库
+> 数据库采用mongoDB 引入Node.js的MongoDB对象建模工具Mongoose。schema是mongoose里会用到的一种数据模式，可以理解为表结构的定义
+
+1. UserSchema (会员信息)
+
+var UserSchema = new Schema({
+  userid:{
+    type:ObjectId,
+    required:true
+  },
+})
+
+| 字段     | 数据类型 |  是否必填 | 说明
+| ---- | ---- | ---- | ----
+| userid   | number  | true     | 主键 会员唯一id
+| username | string  | false    | 会员名称
+| gender   | number  | false    | 会员性别 0-男 1-女
+| profession| string | false    | 会员职业
+| grade    | number  | true     | 会员类型 0-普通会员 1-VIP会员 默认为0
+| mobile   | number  | true     | 会员电话 客户端唯一标识
+| age      | number  | false    | 会员年龄
 

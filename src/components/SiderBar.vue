@@ -32,7 +32,7 @@ export default {
           subTitles: [
             {
               title: '订单列表',
-              path: '/home/order/list',
+              path: '/home/order/list/1',
               isShow:true,
               itmes: [],
             },
@@ -51,7 +51,7 @@ export default {
           subTitles: [
             {
               title: '会员列表',
-              path: '/home/customer/list',
+              path: '/home/customer/list/1',
               isShow:true,
               itmes: []
             },
@@ -70,7 +70,7 @@ export default {
           subTitles: [
             {
               title: '商品列表',
-              path: '/home/goods/list',
+              path: '/home/goods/list/1',
               isShow:true,
               itmes: []
             },

@@ -13,7 +13,7 @@
           <div class="form-group f-cb">
             <span class="input-label f-fl">会员等级：</span>
             <el-radio-group class="f-fl" v-model="searchData.grade">
-              <el-radio>全部</el-radio>
+              <el-radio :label="0">全部</el-radio>
               <el-radio :label="3">普通会员</el-radio>
               <el-radio :label="6">VIP会员</el-radio>
             </el-radio-group>
@@ -21,8 +21,8 @@
           <div class="form-group f-cb">
             <span class="input-label f-fl">办理时间：</span>
             <el-radio-group class="f-fl f-cb" v-model="searchData.data">
-              <el-radio class="f-fl" label='all'>全部</el-radio>
-              <el-radio class="f-fl" @click.native.stop="choiceDate">自定义</el-radio>
+              <el-radio class="f-fl" :label='0'>全部</el-radio>
+              <el-radio class="f-fl" :label='1' @click.native.stop="choiceDate">自定义</el-radio>
               <div class="date-picker f-fl" v-if="searchData.showDatePicker">
                 <el-date-picker v-model="searchData.startDate" type="date" placeholder="选择起始日期" :picker-options="datePickerConfig">
                 </el-date-picker>
@@ -35,7 +35,7 @@
         </div>
       </div>
       <!-- 表格模块 -->
-      
+
       <div class="m-table">
         <el-button type="primary">
           <router-link to="/home/customer/add">新增会员</router-link>
@@ -47,8 +47,9 @@
               <!-- <span v-popover:customerInfo>{{scope.row.name}}</span> -->
               <el-popover placement="bottom-start" trigger="hover">
                 <div>
-                  <p>年龄：18</p>
+                  <p>年龄：18  男</p>
                   <p>职业：coder</p>
+                  <p>会员等级：VIP会员</p>
                 </div>
                 <span slot="reference" class="s-link">{{scope.row.name}}</span>
               </el-popover>
@@ -60,18 +61,18 @@
           </el-table-column>
           <!-- <el-table-column prop="profession" label="职业">
           </el-table-column> -->
-          <el-table-column width="180" prop="orderCount" label="累计订单数">
-          
+          <el-table-column width="180" prop="orderCount" label="累计订单数" >
+
           </el-table-column>
           <el-table-column width="180" prop="moneyCount" label="累计订单金额">
-    
+
           </el-table-column>
-          
+
           <el-table-column width="150" prop="creatTime" label="办理时间">
           </el-table-column>
           <el-table-column prop="staff" label="经办人">
           </el-table-column>
-          <el-table-column label="操作" width="200">  
+          <el-table-column label="操作" width="200">
             <template scope="scope">
               <el-button v-modal size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
               <el-button v-modal size="small" @click="handleEdit(scope.$index, scope.row)">详情</el-button>
@@ -91,7 +92,7 @@
         </el-pagination>
       </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -106,14 +107,14 @@ export default {
           path: '/home/customer'
         }, {
           title: '会员列表',
-          path: '/home/customer/list'
+          path: '/home/customer/list/1'
         }
       ],
       searchData: {
         searchContent: '',
         placeholder: '请输入会员姓名、电话',
-        grade: 6,
-        data: '',
+        grade: 0,
+        data: 0,
         startDate: '',
         endDate: '',
         showDatePicker: false
@@ -251,7 +252,7 @@ export default {
         staff: 'yg',
         grade:'VIP会员'
       }],
-      
+
     }
   },
   components: {
@@ -284,7 +285,7 @@ export default {
   },
   mounted(){
     document.body.onclick = ()=>{
-      this.searchData.showDatePicker = false;
+      // this.searchData.showDatePicker = false;
     }
   },
   activated() {
