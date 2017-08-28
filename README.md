@@ -51,6 +51,9 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 ### 数据库
 > 数据库采用mongoDB 引入Node.js的MongoDB对象建模工具Mongoose。schema是mongoose里会用到的一种数据模式，可以理解为表结构的定义。schema中以键值对的形式,定义数据库中每个字段的类型、默认值、是否必填等参数
 
+#### 用户数据
+> 初步使用 ` RBAC`(Role-Based Access Control)模型 建立三个 `schema` 用户表、角色表、权限表。使用该模型只需关注用户是何种角色，角色对应的是何种权限，将三者关系充分解耦，当需要改变某个用户的权限时只需改变其角色，不用关心其它。需要增加或改变某种权限时只需要增加或改变权限表中的内容即可，增强其扩展性。本系统大致只分为两类角色，店长和普通店员，分别对应两种权限列表。前端登录后后端会返回该角色的权限列表，然后前端根据该列表进行权限控制，粒度细化到按钮级别。
+
 1. 用户schema
 
 | Field | Type | Reqiured | Default | explanation
@@ -65,6 +68,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 | Field | Type | Reqiured | Default | explanation
 | ---- | ---- | ---- | ---- | ---- | ----
+| _id  | ObjectId | true | | 
 | role | string | true | | 角色名称 0 or 1 
 | permission | string | true | | 权限等级 0 or 1
 
@@ -72,6 +76,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 | Field | Type | Reqiured | Default | explanation
 | ---- | ---- | ---- | ---- | ---- | ----
+| _id  | ObjectId | true | | 
 | permission | array | true | | 权限等级对应的权限列表
 
 ***
