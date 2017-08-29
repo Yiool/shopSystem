@@ -44,7 +44,50 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
     解决方法：新增页面数据提交成功后调用 ` $destory() ` 方法，手动销毁该组件，确保每次进入该组件都会重新初始化该组件。
 
+3. Vue中使用echarts图表
+    
+    安装依赖
+
+    `npm install echarts -S`
+
+    按需引入
+    在组件中按需引入需要用到的图表模块，例：
+
+    ```
+    // 引入基本模板
+    let echarts = require('echarts/lib/echarts')
+    // 引入柱状图组件
+    require('echarts/lib/chart/bar')
+    // 引入提示框和title组件
+    require('echarts/lib/component/tooltip')
+    require('echarts/lib/component/title')
+
+    // 在 method 中定义创建图标的方法
+    methods: {
+        drawLine() {
+            // 基于准备好的dom，初始化echarts实例
+            let myChart = echarts.init(document.getElementById('myChart'))
+            // 绘制图表
+            myChart.setOption({
+                title: { text: 'ECharts 入门示例' },
+                tooltip: {},
+                xAxis: {
+                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+                },
+                yAxis: {},
+                series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+                }]
+            });
+        }
+    }
+
+    ```
+
 ### 后台
+
 后端api文档请移步至：[API_DOC.md](./API_DOC.md)
 
 1. 要解析请求中携带的参数、需使用express中间件body-parser，其中路径信息保存在 ` req.url ` 中； ` params ` 信息保存在 `req.params` 中；` query` 查询参数保存在  `req.query` 中。能获取到上述参数后便可以获取这些参数、进行针对性操作

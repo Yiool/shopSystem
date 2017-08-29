@@ -81,6 +81,45 @@ export default {
               itmes: []
             }
           ]
+        },
+        {
+          title: '财务管理',
+          itemIcon: 'iconfont icon-caiwuguanlibaobiao',
+          path: '/home/financial',
+          subTitles: [
+            {
+              title: '财务列表',
+              path: '/home/financial/list/1',
+              isShow:true,
+              itmes: []
+            },
+          ]
+        },
+        {
+          title: '库存管理',
+          itemIcon: 'iconfont icon-ccgl-kucunguanli-6',
+          path: '/home/inventory',
+          subTitles: [
+            {
+              title: '库存列表',
+              path: '/home/inventory/list/1',
+              isShow:true,
+              itmes: []
+            },
+          ]
+        },
+        {
+          title: '权限管理',
+          itemIcon: 'iconfont icon-shangpinguanli',
+          path: '/home/permission',
+          subTitles: [
+            {
+              title: '权限列表',
+              path: '/home/permission/list/1',
+              isShow:true,
+              itmes: []
+            },
+          ]
         }
       ],
       isCollapse: true,

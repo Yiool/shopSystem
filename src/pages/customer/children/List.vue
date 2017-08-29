@@ -289,6 +289,7 @@ export default {
     }
   },
   activated() {
+    console.log(this.$route);
     this.http('customer','list',{}).then((res)=>{
       console.log(res);
     });
