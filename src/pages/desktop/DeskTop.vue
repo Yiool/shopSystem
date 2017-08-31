@@ -46,13 +46,14 @@
                     <div id="myChart"></div>
                 </div>
             </div>
-
+			<Toast :obj=obj></Toast>
         </div>
     </div>
 </template>
 
 <script>
 import brandRumb from '../../components/BreadCrumb.vue'
+import Toast from '../../components/toast.vue'
 // 引入基本模板
 let echarts = require('echarts/lib/echarts')
     // 引入柱状图组件
@@ -78,11 +79,22 @@ export default {
                 orderCount: '10',
                 customerCount: '20',
                 taskCount: '5'
+            },
+            obj:{
+            	show:true,
+            	content:"？",
+            	confirm:function(){
+            		console.log(1)
+            	},
+            	cancel:function(){
+            		console.log(2)
+            	}
             }
         }
     },
     components: {
-        brandRumb
+        brandRumb,
+        Toast
     },
     methods:{
         initChart:function(){
