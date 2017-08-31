@@ -1,5 +1,77 @@
 import apiConfig from './apiConfig.js'
 import Axios from 'axios'
+
+/**
+ * 请求拦截器
+ */
+Axios.interceptors.request.use((config) =>{
+    console.log('request');
+    return config;
+}, (error)=> {
+    return Promise.reject(error);
+});
+
+
+/**
+ * 响应拦截器
+ */
+Axios.interceptors.response.use(function (response) {
+    console.log(response);
+    return response;
+}, function (err) {
+    console.log(err.response.status);
+    if(err && err.response.status){
+        switch (err.response.status) {
+            case 400:
+              err.message = '请求错误'
+              break
+      
+            case 401:
+              err.message = '未授权，请登录'
+              break
+      
+            case 403:
+              err.message = '拒绝访问'
+              break
+      
+            case 404:
+              err.message = `请求地址出错: ${err.response.config.url}`
+              break
+      
+            case 408:
+              err.message = '请求超时'
+              break
+      
+            case 500:
+              err.message = '服务器内部错误'
+              break
+      
+            case 501:
+              err.message = '服务未实现'
+              break
+      
+            case 502:
+              err.message = '网关错误'
+              break
+      
+            case 503:
+              err.message = '服务不可用'
+              break
+      
+            case 504:
+              err.message = '网关超时'
+              break
+      
+            case 505:
+              err.message = 'HTTP版本不受支持'
+              break
+      
+            default:
+        }
+    }
+    // 对响应错误做点什么
+    return Promise.reject(err);
+});
 const apiRequestHandler = function(parent, current, dataConfig) {
     return new Promise((resolve, reject) => {
         let now = apiConfig[parent][current];
@@ -13,6 +85,7 @@ const apiRequestHandler = function(parent, current, dataConfig) {
             baseURL: 'http://localhost:8080/api/v1',
             timeout: 5000,
             url: now.url,
+            method:now.type,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -32,7 +105,7 @@ const apiRequestHandler = function(parent, current, dataConfig) {
          * 1.get  携带参数写法为：params:{}
          * 2.post 携带参数写法为：data：{}
          */
-        if (now.type === 'get') {
+        if (now.type === 'get' || now.type === 'delete') {
             let params = _.assign({}, DEFAULT_PARAMS, dataConfig);
             DEFAULT_AXIOS_CONFIG = _.assign({}, DEFAULT_AXIOS_CONFIG, {
                 params: params
@@ -40,7 +113,6 @@ const apiRequestHandler = function(parent, current, dataConfig) {
         } else if (now.type === 'post') {
             let data = _.assign({}, DEFAULT_PARAMS, dataConfig);
             DEFAULT_AXIOS_CONFIG = _.assign({}, DEFAULT_AXIOS_CONFIG, {
-                method: 'post',
                 data: data
             })
         }
