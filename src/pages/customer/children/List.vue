@@ -266,9 +266,14 @@ export default {
       console.log(val);
     },
     choiceDate: function (event) {
-
       console.log(123);
       this.searchData.showDatePicker = true;
+    },
+    handleDelete:function(index,item){
+      console.log(index,item);
+      this.http('customer','delete',{id:123}).then((res)=>{
+        
+      });
     }
   },
   directives:{
@@ -284,14 +289,14 @@ export default {
     console.log('customer-init');
   },
   mounted(){
-    document.body.onclick = ()=>{
-      // this.searchData.showDatePicker = false;
-    }
+    
   },
   activated() {
     console.log(this.$route);
     this.http('customer','list',{}).then((res)=>{
       console.log(res);
+    }).catch((err)=>{
+      console.log(err.message);
     });
     // console.log(window);
     /*window.onclick = ()=>{

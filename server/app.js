@@ -65,7 +65,12 @@ app.post('/api/v1/customer', function (req, res) {
   console.log(req.body);
   res.send('ok');
 }) */
-
+/* 路径未匹配到时 */
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 app.use('/api/v1',router);
 
 server.listen(8080);

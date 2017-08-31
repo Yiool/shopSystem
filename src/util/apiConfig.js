@@ -35,6 +35,10 @@ const API_CONFIG = {
         add: {
             url: '/customer',
             type: 'post'
+        },
+        delete:{
+            url:'/customer',
+            type:'delete'
         }
     },
     goods: {
