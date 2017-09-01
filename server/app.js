@@ -1,16 +1,9 @@
 const http = require('http')
-const express = require('express');
-const router = require('./customer');
-const MongoClient = require('mongodb').MongoClient;
-
-const bodyParser = require('body-parser');
-//连接test数据库
-/* var url = 'mongodb://localhost:27017/test';
-MongoClient.connect(url, (err,db) => {
-    console.log('连接成功',db);
-    db.close();
-}); */
-var app = express();
+const express = require('express')
+const router = require('./router/router')
+const bodyParser = require('body-parser')
+const mongoose = require('./controller/mongoose')
+let app = express();
 
 app.use(bodyParser.urlencoded({
     extended: false

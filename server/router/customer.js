@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('body-parser');
-var jsonParser = bodyParser.json()
+// const bodyParser = require('body-parser');
+// const jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+// var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
 /**
  * customer post请求----添加一条数据
  */
-router.post('/customer', function(req, res) {
+router.post('/', function(req, res) {
     /* 解析req参数 */
     //1.username
     let username = req.body.username;
@@ -23,7 +23,7 @@ router.post('/customer', function(req, res) {
 /**
  * get请求---- 返回所有custoer信息
  */
-router.get('/customer', function(req, res) {
+router.get('/', function(req, res) {
     /* 解析req参数 */
     //1. 页码page
     //2. 每页条数pagesize
@@ -34,7 +34,7 @@ router.get('/customer', function(req, res) {
     res.send(req.body);
 });
 
-router.delete('/customer',function(req,res){
+router.delete('/', function(req, res) {
     console.log(req.body);
     res.send('delete a cutomer');
 });
