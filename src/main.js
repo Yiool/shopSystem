@@ -6,6 +6,7 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store/index.js'
+import permission from './directive/permission'
 import _ from 'lodash'
 import Pagination from './components/pagination/index.js'
 
@@ -20,6 +21,7 @@ Vue.use(ElementUI); //使用element-ui
 Vue.use(VueAxios, axios); //封装axios
 Vue.use(Pagination); //将分页组件封装成全局组件
 Vue.prototype.http = ApiConfig; // 封装数据后台交互函数
+
 
 
 Vue.config.productionTip = false

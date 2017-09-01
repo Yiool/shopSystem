@@ -7,7 +7,8 @@ import VueAxios from 'vue-axios'
 Vue.use(Vuex);
 
 const state = {
-    isLogin: false
+    isLogin: false,
+    permission: ['home', 'desktop', 'customer', 'customer:add', 'customer:edit', 'customer:delete', 'customer:detail', 'order', 'order:add']
 };
 
 const actions = {

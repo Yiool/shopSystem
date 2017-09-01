@@ -13,7 +13,7 @@ MongoClient.connect(url, (err,db) => {
 var app = express();
 
 app.use(bodyParser.urlencoded({
-  extended: false
+    extended: false
 }))
 
 // parse application/json
@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 
 let server = require('http').createServer(app);
 //指定静态文件的位置
-// app.use('/', express.static(__dirname + '/public')); 
+// app.use('/', express.static(__dirname + '/public'));
 //监听端口号
 /*var pageUrl = 'http://www.jianshu.com/';
 
@@ -35,43 +35,23 @@ http.get(pageUrl, function(res) {
     });
 });*/
 
-app.all('*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-  res.header("X-Powered-By", ' 3.2.1')
-  res.header("Content-Type", "application/json;charset=utf-8");
-  next();
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By", ' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
 })
 
-
-/*
-
-app.get('/api/v1/customer/add',function(req,res){
-    console.log(req.body);
-    res.send("123");
-})
-
-*/
-// app.use('/api/v1',router);
-
-/* app.get('/api/v1/customer', function (req, res) {
-
-  console.log(req.body);
-  res.send("ok");
-})
-// http://localhost:8080/api/v1/customer
-app.post('/api/v1/customer', function (req, res) {
-  console.log(req.body);
-  res.send('ok');
-}) */
+app.use('/api/v1', router);
 /* 路径未匹配到时 */
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-app.use('/api/v1',router);
+
 
 server.listen(8080);
 console.log('create a local server')

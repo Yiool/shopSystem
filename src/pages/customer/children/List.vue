@@ -37,7 +37,7 @@
       <!-- 表格模块 -->
 
       <div class="m-table">
-        <el-button type="primary">
+        <el-button type="primary" v-permission:customer:add>
           <router-link to="/home/customer/add">新增会员</router-link>
         </el-button>
         <el-table class="m-table" :data="tableData" stripe style="width: 100%">
@@ -74,9 +74,9 @@
           </el-table-column>
           <el-table-column label="操作" width="200">
             <template scope="scope">
-              <el-button v-modal size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-              <el-button v-modal size="small" @click="handleEdit(scope.$index, scope.row)">详情</el-button>
-              <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              <el-button v-permission:customer:edit size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <el-button v-permission:customer:detail size="small" @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+              <el-button v-permission:customer:delete size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -101,6 +101,7 @@ import brandRumb from '../../../components/BreadCrumb.vue'
 export default {
   data() {
     return {
+      loading:true,
       navLinks: [
         {
           title: '会员管理',
@@ -272,7 +273,7 @@ export default {
     handleDelete:function(index,item){
       console.log(index,item);
       this.http('customer','delete',{id:123}).then((res)=>{
-        
+
       });
     }
   },
@@ -289,7 +290,7 @@ export default {
     console.log('customer-init');
   },
   mounted(){
-    
+
   },
   activated() {
     console.log(this.$route);

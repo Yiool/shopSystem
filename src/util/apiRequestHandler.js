@@ -1,13 +1,17 @@
 import apiConfig from './apiConfig.js'
 import Axios from 'axios'
+import { Loading, Message } from 'element-ui'
 
 /**
  * 请求拦截器
  */
-Axios.interceptors.request.use((config) =>{
+var loadinginstace;
+Axios.interceptors.request.use(function(config) {
     console.log('request');
+    // this.$message('这是一条消息提示');
+    // loadinginstace = Loading.service({ fullscreen: true })
     return config;
-}, (error)=> {
+}, (error) => {
     return Promise.reject(error);
 });
 
@@ -15,57 +19,90 @@ Axios.interceptors.request.use((config) =>{
 /**
  * 响应拦截器
  */
-Axios.interceptors.response.use(function (response) {
-    console.log(response);
+Axios.interceptors.response.use(function(response) {
+    console.log(response.data);
     return response;
-}, function (err) {
+}, function(err) {
     console.log(err.response.status);
-    if(err && err.response.status){
+    if (err && err.response.status) {
         switch (err.response.status) {
             case 400:
-              err.message = '请求错误'
-              break
-      
+                err.message = '请求错误';
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 401:
-              err.message = '未授权，请登录'
-              break
-      
+                err.message = '未授权，请登录'
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 403:
-              err.message = '拒绝访问'
-              break
-      
+                err.message = '拒绝访问'
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 404:
-              err.message = `请求地址出错: ${err.response.config.url}`
-              break
-      
+                err.message = `请求地址出错: ${err.response.config.url}`;
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 408:
-              err.message = '请求超时'
-              break
-      
+                err.message = '请求超时'
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 500:
-              err.message = '服务器内部错误'
-              break
-      
+                err.message = '服务器内部错误'
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 501:
-              err.message = '服务未实现'
-              break
-      
+                err.message = '服务未实现'
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 502:
-              err.message = '网关错误'
-              break
-      
+                err.message = '网关错误'
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 503:
-              err.message = '服务不可用'
-              break
-      
+                err.message = '服务不可用'
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 504:
-              err.message = '网关超时'
-              break
-      
+                err.message = '网关超时'
+                Message.error({
+                    message: err.message
+                })
+                break
+
             case 505:
-              err.message = 'HTTP版本不受支持'
-              break
-      
+                err.message = 'HTTP版本不受支持'
+                Message.error({
+                    message: err.message
+                })
+                break
+
             default:
         }
     }
@@ -85,7 +122,7 @@ const apiRequestHandler = function(parent, current, dataConfig) {
             baseURL: 'http://localhost:8080/api/v1',
             timeout: 5000,
             url: now.url,
-            method:now.type,
+            method: now.type,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
