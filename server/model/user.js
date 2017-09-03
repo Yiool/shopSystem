@@ -1,7 +1,7 @@
-var mongoose = require('../controller/mongoose'),
+let mongoose = require('../controller/mongoose'),
     Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
+let UserSchema = new Schema({
     username: { type: String }, //用户账号
     userpwd: { type: String }, //密码
     role: { type: String },

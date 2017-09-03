@@ -127,6 +127,9 @@ export default {
     },
     created() {
         console.log('desktop-init');
+        this.http('home','login',{username:'yg',password:'123456'}).then(function(res){
+            console.log(res.data);
+        })
     },
     mounted(){
         this.initChart();

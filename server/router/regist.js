@@ -1,4 +1,4 @@
-// const express = require('express');
+const express = require('express');
 const router = express.Router();
 
 router.post('/regist', function(req, res) {
@@ -15,3 +15,5 @@ router.post('/regist', function(req, res) {
         status: 0
     });
 });
+
+module.exports = router

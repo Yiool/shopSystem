@@ -124,7 +124,8 @@ const apiRequestHandler = function(parent, current, dataConfig) {
             url: now.url,
             method: now.type,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
             }
         };
 

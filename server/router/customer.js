@@ -13,11 +13,11 @@ const router = express.Router();
 router.post('/', function(req, res) {
     /* 解析req参数 */
     //1.username
-    let username = req.body.username;
+    let username = req.body.t;
     //2.password
     let password = req.body.password;
-
-    res.json({ data: 'message', status: 0 });
+    console.log(req.body)
+    res.json({ data: username, status: 0 });
 });
 
 /**
