@@ -1,13 +1,13 @@
 import apiConfig from './apiConfig.js'
 import Axios from 'axios'
 import { Loading, Message } from 'element-ui'
+import Router from '../router/index'
 
 /**
  * 请求拦截器
  */
 var loadinginstace;
 Axios.interceptors.request.use(function(config) {
-    console.log('request');
     // this.$message('这是一条消息提示');
     // loadinginstace = Loading.service({ fullscreen: true })
     return config;
@@ -20,10 +20,8 @@ Axios.interceptors.request.use(function(config) {
  * 响应拦截器
  */
 Axios.interceptors.response.use(function(response) {
-    console.log(response.data);
     return response;
 }, function(err) {
-    console.log(err.response.status);
     if (err && err.response.status) {
         switch (err.response.status) {
             case 400:
@@ -38,6 +36,7 @@ Axios.interceptors.response.use(function(response) {
                 Message.error({
                     message: err.message
                 })
+                Router.push({ path: '/login' })
                 break
 
             case 403:

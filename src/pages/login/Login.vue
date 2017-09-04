@@ -8,7 +8,7 @@
                 <el-form-item label="密码">
                     <el-input type="password" v-model="password" placeholder="请输入密码"></el-input>
                 </el-form-item>
-                
+
                 <p class="warning-tips" v-show="showWarning">用户名或密码错误</p>
 
                 <el-form-item>
@@ -16,14 +16,12 @@
                 </el-form-item>
             </el-form>
         </div>
-        <Pagination :pagegation-config="pagegationConfig" ></Pagination>
-        
+        <!-- <Pagination :pagegation-config="pagegationConfig" ></Pagination> -->
+
     </div>
 </template>
 
 <script>
-// import mock from '../../util/mock';
-// import Pagegation from '../../components/Pagegation'
 export default {
     components:{
         // Pagegation
@@ -32,52 +30,37 @@ export default {
         return {
             username: '',
             password: '',
+            role:'0',
             showWarning:false,
-            totalCount:100,
-            pagegationConfig:{
-                totalCount:100,
-                showPageGoto:true,
-                handler:function(data){
-                    console.log(this.totalCount,data);  //页面跳转回调函数
-                }
-            }
         }
     },
     methods: {
+        interception:function(){
+          let flag = true;
+          if(!this.username){
+            flag= false;
+          }
+          if(!this.password){
+            flag= false;
+          }
+          return flag;
+        },
         login: function () {
-            /*this.axios.post('http://login.cn', {
-                username: this.username,
-                password: this.password
-            }).then((response) => {
-                if (response.data.status == 0) {
-                    this.$store.dispatch("login");
-                    this.$router.push({ path: '/home' });
-                }else {
-                    this.showWarning = true;
-                }
-            })*/
-            /*var payLoad = { username: this.username, password: this.password };
-            this.$store.dispatch("login", payLoad).then(() => {
-                if (this.$store.state.isLogin) {
-                    // $state.push();
-                    console.log(this.$router.push);
-                    // this.$router.push({path: '/home'});
-                    // this.router.push('home')
-                }
-            });*/
-
+            if(!(this.interception())){
+              return false;
+            }
+            this.http('home','login',{username:this.username,password:this.password,role:'0'}).then((res)=>{
+              let data = res.data;
+              if(data.status === 0){
+                this.$router.push({path:'/home'});
+              } else {
+                this.showWarning = true;
+              }
+            })
         },
     },
     mounted(){
-        /* DOM 挂载成功后给document绑定键盘事件、实现enter登录 */
-        document.onkeyup=(event)=>{
-            if(event.keyCode === 13){
-                this.login();
-            }
-        };
-        this.axios.post('http://localhost:8080?userid=0&type=1').then((res)=>{
-            console.log(res.data);
-        })
+
     }
 }
 </script>
