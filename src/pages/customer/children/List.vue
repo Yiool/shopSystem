@@ -35,7 +35,7 @@
         </div>
       </div>
       <!-- 表格模块 -->
-
+    {{tableData[0].grade | formatStatus('gradeType')}}
       <div class="m-table">
         <el-button type="primary" v-permission:customer:add>
           <router-link to="/home/customer/add">新增会员</router-link>
@@ -43,15 +43,22 @@
         <el-table class="m-table" :data="tableData" stripe style="width: 100%">
           <el-table-column label="姓名" width="120">
             <template scope="scope">
-              <span class="avatar">{{ scope.row.name.substr(0,1)}}</span>
+              <span class="avatar">{{ scope.row.username.substr(0,1)}}</span>
               <!-- <span v-popover:customerInfo>{{scope.row.name}}</span> -->
               <el-popover placement="bottom-start" trigger="hover">
                 <div>
-                  <p>年龄：18  男</p>
-                  <p>职业：coder</p>
-                  <p>会员等级：VIP会员</p>
+                  <p>年龄：
+                    <span>{{scope.row.age}}</span>
+                    <span>{{scope.row.gender }}</span>
+                  </p>
+                  <p>职业：
+                    <span>{{scope.row.profession}}</span>
+                  </p>
+                  <p>会员等级：
+                    <span>{{scope.row.grade | formatStatus('gradeType')}}</span>
+                  </p>
                 </div>
-                <span slot="reference" class="s-link">{{scope.row.name}}</span>
+                <span slot="reference" class="s-link">{{scope.row.username}}</span>
               </el-popover>
             </template>
           </el-table-column>
@@ -60,22 +67,22 @@
           <el-table-column width="100" prop="grade" label="会员等级">
           </el-table-column>
           <!-- <el-table-column prop="profession" label="职业">
-          </el-table-column> -->
-          <el-table-column width="180" prop="orderCount" label="累计订单数" >
+            </el-table-column> -->
+          <el-table-column width="180" prop="orderCount" label="累计订单数">
 
           </el-table-column>
-          <el-table-column width="180" prop="moneyCount" label="累计订单金额">
+          <el-table-column width="180" prop="orderMoneyConut" label="累计订单金额">
 
           </el-table-column>
 
-          <el-table-column width="150" prop="creatTime" label="办理时间">
+          <el-table-column width="150" prop="createTime" label="办理时间">
           </el-table-column>
           <el-table-column prop="staff" label="经办人">
           </el-table-column>
           <el-table-column label="操作" width="200">
             <template scope="scope">
               <el-button v-permission:customer:edit size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-              <el-button v-permission:customer:detail size="small" @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+              <el-button v-permission:customer:detail size="small" @click="handleDetail(scope.$index, scope.row)">详情</el-button>
               <el-button v-permission:customer:delete size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
@@ -83,12 +90,8 @@
       </div>
       <!-- 分页模块 -->
       <div class="m-pagination f-fr">
-         <!-- <Pagination :pagegationConfig=""></Pagination>  -->
-         <el-pagination
-          @current-change="handleCurrentChange"
-          :current-page="1"
-          layout="total, prev, pager, next, jumper"
-          :total="400">
+        <!-- <Pagination :pagegationConfig=""></Pagination>  -->
+        <el-pagination @current-change="handleCurrentChange" :current-page="1" layout="total, prev, pager, next, jumper" :total="totalCount">
         </el-pagination>
       </div>
     </div>
@@ -101,7 +104,7 @@ import brandRumb from '../../../components/BreadCrumb.vue'
 export default {
   data() {
     return {
-      loading:true,
+      loading: true,
       navLinks: [
         {
           title: '会员管理',
@@ -135,170 +138,67 @@ export default {
         resource: '',
         desc: ''
       },
-      tableData: [{
-        name: 'Yiool',
-        mobile: '13554407111',
-        profession: '上海市普陀区金沙江路 1518 弄',
-        moneyCount:'10000',
-        orderCount:'2',
-        leftEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        rightEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        pd: '64',
-        ADD: '32.5',
-        creatTime: '2017-08-13',
-        staff: 'yg',
-        grade:'VIP会员'
-      }, {
-        name: 'Yiool',
-        mobile: '13554407111',
-        profession: '上海市普陀区金沙江路 1518 弄',
-        moneyCount:'10000',
-        orderCount:'2',
-        leftEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        rightEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        pd: '64',
-        ADD: '32.5',
-        creatTime: '2017-08-13',
-        staff: 'yg',
-        grade:'VIP会员'
-      }, {
-        name: 'Yiool',
-        mobile: '13554407111',
-        profession: '上海市普陀区金沙江路 1518 弄',
-        moneyCount:'10000',
-        orderCount:'2',
-        leftEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        rightEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        pd: '64',
-        ADD: '32.5',
-        creatTime: '2017-08-13',
-        staff: 'yg',
-        grade:'VIP会员'
-      },
-      {
-        name: 'Yiool',
-        mobile: '13554407111',
-        profession: '上海市普陀区金沙江路 1518 弄',
-        moneyCount:'10000',
-        orderCount:'2',
-        leftEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        rightEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        pd: '64',
-        ADD: '32.5',
-        creatTime: '2017-08-13',
-        staff: 'yg',
-        grade:'VIP会员'
-      },
-      {
-        name: 'Yiool',
-        mobile: '13554407111',
-        profession: '上海市普陀区金沙江路 1518 弄',
-        moneyCount:'10000',
-        orderCount:'2',
-        leftEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        rightEyes: {
-          DS: '+1.25',
-          DC: '-1.25',
-          AX: '85',
-          VA: '0.9'
-        },
-        pd: '64',
-        ADD: '32.5',
-        creatTime: '2017-08-13',
-        staff: 'yg',
-        grade:'VIP会员'
-      }],
-
+      tableData: [],
+      totalCount: 0
     }
   },
   components: {
     brandRumb
   },
   methods: {
-    handleIconClick: function () {
+    handleIconClick: function() {
       // console.log(123);
     },
-    handleCurrentChange:function(val){
+    handleCurrentChange: function(val) {
       console.log(val);
+      this.$router.push('/home/customer/' + val);
     },
-    choiceDate: function (event) {
+    choiceDate: function(event) {
       console.log(123);
       this.searchData.showDatePicker = true;
     },
-    handleDelete:function(index,item){
-      console.log(index,item);
-      this.http('customer','delete',{id:123}).then((res)=>{
-
+    handleDelete: function(index, item) {
+      console.log(index, item);
+      let params = { _id: item._id }
+      this.http('customer', 'delete', params).then((res) => {
+        console.log(res.data);
+        if(res.data.status == 0){
+          this.getList();
+        }
+      });
+    },
+    handleEdit:function(index,item){},
+    handleDetail:function(index,item){},
+    getList: function() {
+      console.log(this.$route);
+      let currentParams = this.$route.params;
+      currentParams.pageSize = 10;
+      this.http('customer', 'list', currentParams).then((res) => {
+        let data = res.data;
+        this.tableData = data.data;
+        this.totalCount = data.totalCount;
+      }).catch((err) => {
+        console.log(err.message);
       });
     }
   },
-  directives:{
-    modal:{
-      bind: (el)=>{
-        el.onmouseenter = function(){
+  directives: {
+    modal: {
+      bind: (el) => {
+        el.onmouseenter = function() {
           console.log(1234);
         }
       }
     }
   },
-  created(){
+  created() {
     console.log('customer-init');
   },
-  mounted(){
+  mounted() {
 
   },
   activated() {
-    console.log(this.$route);
-    this.http('customer','list',{}).then((res)=>{
-      console.log(res);
-    }).catch((err)=>{
-      console.log(err.message);
-    });
+      this.getList();
     // console.log(window);
     /*window.onclick = ()=>{
       // console.log(123);
@@ -332,10 +232,10 @@ export default {
   }
   .m-table {
     button {
-        a {
-          color:#fff;
-        }
+      a {
+        color: #fff;
       }
+    }
     .m-table {
       margin-top: 20px;
       .avatar {
@@ -350,13 +250,13 @@ export default {
         color: #f1f1f1;
       }
       .s-link {
-        color:#038ae3;
+        color: #038ae3;
         cursor: pointer;
       }
     }
   }
   .m-pagination {
-    margin:20px 20px 20px 0;
+    margin: 20px 20px 20px 0;
   }
 }
 </style>

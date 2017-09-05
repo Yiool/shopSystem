@@ -15,7 +15,7 @@
             <el-input class="input-w-180" v-model="form.mobile" placeholder="请输入会员电话"></el-input>
           </el-form-item>
           <el-form-item label="姓名：">
-            <el-input class="input-w-180" v-model="form.name" placeholder="请输入会员姓名"></el-input>
+            <el-input class="input-w-180" v-model="form.username" placeholder="请输入会员姓名"></el-input>
           </el-form-item>
           <el-form-item label="性别：">
             <el-radio-group v-model="form.gender">
@@ -174,7 +174,7 @@ export default {
       //表单初始化数据
       form: {
         //步骤1数据
-        name: '',
+        username: '',
         gender:'',
         age:'',
         profession: '',

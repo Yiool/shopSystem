@@ -1,6 +1,8 @@
 let mongoose = require('mongoose'),
     DB_URL = 'mongodb://localhost:27017/shop';
 
+
+mongoose.set('debug', true);
 /**
  * 连接
  */

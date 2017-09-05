@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-// const bodyParser = require('body-parser');
-// const jsonParser = bodyParser.json();
+let Customer = require('../model/customerModel')
+let _ = require('lodash')
+    // const bodyParser = require('body-parser');
+    // const jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
 // var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -12,12 +14,23 @@ const router = express.Router();
  */
 router.post('/', function(req, res) {
     /* 解析req参数 */
-    //1.username
-    let username = req.body.t;
-    //2.password
-    let password = req.body.password;
-    // console.log(req.body)
-    res.json({ data: username, status: 0 });
+    // console.log(req.body);
+    let data = req.body;
+    // _.omit(newData,)
+    let newData = _.omit(data, 't');
+    Customer.create(newData, function(err, doc) {
+        if (!err) {
+            res.json({
+                data: '添加成功',
+                status: 0
+            });
+        } else {
+            res.json({
+                data: '添加失败',
+                status: 1
+            });
+        }
+    });
 });
 
 /**
@@ -30,14 +43,47 @@ router.get('/', function(req, res) {
     //3. 会员等级 grade
     //4. 创建时间(Unix时间戳) createtime
     //5. 排序
-    // console.log(req.body);
-    console.log(req)
-    res.send(req.body);
+    let page = req.query.page * 1 || 1; //第几页 默认第一页
+    let pageSize = req.query.pageSize * 1 || 10; //每页多少条,默认10条
+    let limit = pageSize;
+    let skip = (page - 1) * pageSize;
+    Customer.find({}, function(err, doc) {
+        let totalCount = doc.length;
+        if (!err) {
+            res.json({
+                data: doc,
+                status: 0,
+                totalCount: totalCount
+            })
+        } else {
+            res.send({
+                data: 'error',
+                stauts: 1
+            })
+        }
+
+    }).skip(skip).limit(limit)
 });
 
 router.delete('/', function(req, res) {
-    console.log(req.body);
-    res.send('delete a cutomer');
+    console.log(req);
+    let userid = req.query._id;
+    Customer.remove({
+        _id: userid
+    }, function(err, doc) {
+        if (!err) {
+            res.send({
+                data: '删除成功',
+                status: 0
+            });
+        } else {
+            res.send({
+                data: '删除失败',
+                status: 1
+            })
+        }
+    });
+
 });
 
 

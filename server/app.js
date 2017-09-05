@@ -50,7 +50,7 @@ app.all('*', function(req, res, next) {
     res.header("X-Powered-By", ' 3.2.1')
     res.header("Content-Type", "application/json;charset=utf-8");
     if (req.method === 'OPTIONS') {
-        res.send(200);
+        res.sendStatus(200);
     } else {
         next();
     }
