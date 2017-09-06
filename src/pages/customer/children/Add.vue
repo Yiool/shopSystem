@@ -42,7 +42,7 @@
       </div>
       <div v-if="step === 1">
         <el-form ref="form" :inline="true" :model="form" :rules="rules" label-width="85px">
-          <el-form-item label="瞳距：" >
+          <el-form-item label="瞳距：">
             <el-input class="input-w-180" v-model="form.PD" placeholder="请输入"></el-input>
           </el-form-item>
           <h3>左眼视力</h3>
@@ -73,7 +73,6 @@
             </el-form-item>
           </div>
 
-
           <h3>右眼视力</h3>
           <div class="right-eye">
             <el-form-item label="球镜：">
@@ -102,13 +101,13 @@
             </el-form-item>
           </div>
           <!-- <el-form-item label="左眼视力">
-          </el-form-item>
-          <el-form-item label="右眼视力">
-          </el-form-item> -->
+                                    </el-form-item>
+                                    <el-form-item label="右眼视力">
+                                    </el-form-item> -->
 
           <!-- <el-form-item label="ADD" prop="add">
-            <el-input class="input-w-180" v-model="form.add" placeholder="请输入ADD"></el-input>
-          </el-form-item> -->
+                                      <el-input class="input-w-180" v-model="form.add" placeholder="请输入ADD"></el-input>
+                                    </el-form-item> -->
           <el-form-item class="form-footer">
             <el-button type="primary" @click="step = 0">上一步</el-button>
             <el-button type="primary" @click="toThirdStep('form')">下一步</el-button>
@@ -140,12 +139,18 @@
           <el-form-item label="备注：">
             <el-input class="input-w-180" v-model="form.remark" placeholder="请输入备注"></el-input>
           </el-form-item>
+          <el-form-item label="经办人：">
+            <el-select v-model="form.staff" filterable placeholder="请选择" :change="changeStaff(form.staff)">
+              <el-option v-for="item in staffList" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="step = 1">上一步</el-button>
             <el-button type="primary" @click="onSubmit()">立即创建</el-button>
             <el-button type="primary" @click="submitAndCreatOrder()">创建并开单</el-button>
             <el-button type="primary" @click="goBack()">返&nbsp;&nbsp;&nbsp;&nbsp;回</el-button>
-        </el-form-item>
+          </el-form-item>
         </el-form>
       </div>
     </div>
@@ -170,52 +175,62 @@ export default {
           path: '/home/customer/add'
         }
       ],
-      step:0,  // 步骤条状态 默认为第一步
+      step: 0,  // 步骤条状态 默认为第一步
       //表单初始化数据
       form: {
         //步骤1数据
         username: '',
-        gender:'',
-        age:'',
+        gender: '',
+        age: '',
         profession: '',
         mobile: '',
-        grade:'0',
+        grade: '0',
         //步骤2数据
-        PD:'',
-        leftEye:{
-          DS:'', //球镜
-          DC:'', //柱镜
-          AX:'', //轴位
-          VA:'', //视力
-          ADD:'',//下加光
-          BD:'', //基底
-          HT:'', //瞳高
-          LJ:'', // 棱镜
+        PD: '',
+        leftEye: {
+          DS: '', //球镜
+          DC: '', //柱镜
+          AX: '', //轴位
+          VA: '', //视力
+          ADD: '',//下加光
+          BD: '', //基底
+          HT: '', //瞳高
+          LJ: '', // 棱镜
         },
-        rightEye:{
-          DS:'', //球镜
-          DC:'', //柱镜
-          AX:'', //轴位
-          VA:'', //视力
-          ADD:'',//下加光
-          BD:'', //基底
-          HT:'', //瞳高
-          LJ:'', // 棱镜
+        rightEye: {
+          DS: '', //球镜
+          DC: '', //柱镜
+          AX: '', //轴位
+          VA: '', //视力
+          ADD: '',//下加光
+          BD: '', //基底
+          HT: '', //瞳高
+          LJ: '', // 棱镜
         },
         //步骤3数据
         mirrorBracketBrand: '',  //镜架品牌
-        mirrorBracketType:'',    //镜架类型
+        mirrorBracketType: '',    //镜架类型
         opticBrand: '',          //镜片品牌
-        opticType:'',            //镜片类型
+        opticType: '',            //镜片类型
         remark: '',              //备注信息
-        staff:''
+        staff: ''
       },
+      staffList: [{
+        value: '店长',
+        label: '店长'
+      }, {
+        value: '员工1',
+        label: '员工1'
+      }, {
+        value: '员工2',
+        label: '员工2'
+      }],
       rules: {
         mobile: [
-          {  required: true, message: '请输入11位电话号码', trigger: 'blur' }
+          { required: true, message: '请输入11位电话号码', trigger: 'blur' }
         ],
-        grade:[
-          {  required: true, message: '请选择会员类型', trigger: 'blur' }
+        grade: [
+          { required: true, message: '请选择会员类型', trigger: 'blur' }
         ],
         pd: [
           {
@@ -234,7 +249,7 @@ export default {
     brandRumb
   },
   methods: {
-    toSecondStep:function(formName){
+    toSecondStep: function(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.step = 1;
@@ -243,7 +258,7 @@ export default {
         }
       });
     },
-    toThirdStep:function(formName){
+    toThirdStep: function(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.step = 2;
@@ -252,43 +267,47 @@ export default {
         }
       });
     },
-    onSubmit: function () {
+    changeStaff: function(value) {
+      console.log(value);
+      console.log(this.form.staff)
+    },
+    onSubmit: function() {
       console.log(this.$destroy);
-      this.http('customer','add',this.form).then((res)=>{
+      this.http('customer', 'add', this.form).then((res) => {
         console.log(res);
         this.$message({
           message: '添加成功',
           type: 'success'
         })
-      }).catch((err)=>{
-          this.$message({
-            message: 'error',
-            type: 'success'
-          });
+      }).catch((err) => {
+        this.$message({
+          message: 'error',
+          type: 'error'
         });
+      });
     },
-    submitAndCreatOrder:function(){
-      this.saveData(()=>{
-        this.$router.push({path:'/home/order/add'});
+    submitAndCreatOrder: function() {
+      this.saveData(() => {
+        this.$router.push({ path: '/home/order/add' });
       })
     },
-    goBack:function(){
+    goBack: function() {
       console.log(this);
       this.$destroy();
-      this.$router.push({path:'/home/customer/list/1'});
+      this.$router.push({ path: '/home/customer/list/1' });
     },
-    saveData:function(callBack){
-      this.http('customer','add',this.form).then((res)=>{
+    saveData: function(callBack) {
+      this.http('customer', 'add', this.form).then((res) => {
         let data = res.data;
         if (data.status == 0) {
           callBack && callBack();
-        }else {
+        } else {
           this.$message({
             message: data.message,
             type: 'success'
           });
         }
-      }).catch((err)=>{
+      }).catch((err) => {
         this.$message({
           message: 'error',
           type: 'success'
@@ -296,30 +315,30 @@ export default {
       })
     }
   },
-  created(){
+  created() {
     console.log('init');
   },
-  activated(){
+  activated() {
     console.log(this.step);
     // this.step = 0;
   },
-  destroyed(){
+  destroyed() {
     console.log('销毁');
   }
 }
 </script>
 
 <style lang="less" scoped>
-
 .steps {
   padding-left: 50px;
   padding-top: 20px;
 }
+
 .m-form {
   padding: 20px;
   padding-left: 30px;
   .form-footer {
-    margin-top: 20px ;
+    margin-top: 20px;
     padding-left: 85px;
     text-align: center;
   }
@@ -327,7 +346,7 @@ export default {
     width: 180px;
   }
   h3 {
-    margin:10px 0 20px 20px;
+    margin: 10px 0 20px 20px;
     padding-left: 15px;
     line-height: 20px;
     border-left: 3px solid #20A0FF;

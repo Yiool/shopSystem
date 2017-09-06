@@ -48,22 +48,28 @@ router.get('/', function(req, res) {
     let pageSize = req.query.pageSize * 1 || 10; //每页多少条,默认10条
     let limit = pageSize;
     let skip = (page - 1) * pageSize;
-    Customer.find({}, function(err, doc) {
-        let totalCount = doc.length;
+    let totalCount = 0;
+    let queryParams = _.omit(req.query, 't', 'page', 'pageSize');
+    Customer.count(queryParams, function(err, count) {
         if (!err) {
-            res.json({
-                data: doc,
-                status: 0,
-                totalCount: totalCount
-            })
-        } else {
-            res.send({
-                data: 'error',
-                stauts: 1
-            })
-        }
+            totalCount = count;
+            Customer.find(queryParams, function(err, doc) {
+                if (!err) {
+                    res.json({
+                        data: doc,
+                        status: 0,
+                        totalCount: totalCount
+                    })
+                } else {
+                    res.send({
+                        data: 'error',
+                        stauts: 1
+                    })
+                }
 
-    }).skip(skip).limit(limit)
+            }).skip(skip).limit(limit)
+        }
+    })
 });
 
 router.delete('/', function(req, res) {
