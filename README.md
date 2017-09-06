@@ -31,9 +31,11 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ##开发注意事项：
 ### 前端
-1. 对http网络请求知识了解的不够深,项目中使用axios发送post携带参数,前端报错 ` XMLHttpRequest cannot load http://localhost:8080/api/v1/customer. Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response. `  大致意思为没有设置有效的请求头，解决办法是在axios全局设置中添加请求头设置：
+1. 对http网络请求知识了解的不够深,项目中使用axios发送post携带参数,前端报错 ` XMLHttpRequest cannot load http://localhost:8080/api/v1/customer. Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response. `  大致意思为设置后端不允许设置`Content-Type`请求头，
+解决方法：响应头中允许设置Content-Type请求头
 ```
-   this.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    //伪代码
+    res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
 ```
 
 2. 组件生命周期
@@ -45,7 +47,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
     解决方法：新增页面数据提交成功后调用 ` $destory() ` 方法，手动销毁该组件，确保每次进入该组件都会重新初始化该组件。
 
 3. Vue中使用echarts图表
-    
+
     安装依赖
 
     `npm install echarts -S`
@@ -107,21 +109,21 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 | uname | string | true | | 用户名
 | pword | string | true | | 用户密码
 | role | string | true  | | 用户角色 店长为0 店员为1
- 
+
 
 2. 角色schema
 
 | Field | Type | Reqiured | Default | explanation
-| ---- | ---- | ---- | ---- | ---- 
-| _id  | ObjectId | true | | 
-| role | string | true | | 角色名称 0 or 1 
+| ---- | ---- | ---- | ---- | ----
+| _id  | ObjectId | true | |
+| role | string | true | | 角色名称 0 or 1
 | permission | string | true | | 权限等级 0 or 1
 
 3. 权限schema
 
 | Field | Type    | Reqiured | Default | explanation
-| ---- | ----     | ---- | ---- | ---- 
-| _id  | ObjectId | true |      | 
+| ---- | ----     | ---- | ---- | ----
+| _id  | ObjectId | true |      |
 | permission | array | true | | 权限等级对应的权限列表
 
 ***
@@ -130,7 +132,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 4. 会员schema
 
 | Field | Type | Reqiured | Default | explanation
-| ----     | ----    | ----  | ---- | ---- 
+| ----     | ----    | ----  | ---- | ----
 | userid   | number  | true  |   | 主键 会员唯一id
 | username | string  | false |   | 会员名称
 | gender   | number  | false |   | 会员性别 0-男 1-女
