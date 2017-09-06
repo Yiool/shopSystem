@@ -13,9 +13,9 @@
           <div class="form-group f-cb">
             <span class="input-label f-fl">会员等级：</span>
             <el-radio-group class="f-fl" v-model="searchData.grade">
-              <el-radio :label="0">全部</el-radio>
-              <el-radio :label="3">普通会员</el-radio>
-              <el-radio :label="6">VIP会员</el-radio>
+              <el-radio :label="-1" @click.native="changeGrade(searchData.grade)">全部</el-radio>
+              <el-radio :label="0" @click.native="changeGrade(searchData.grade)">普通会员</el-radio>
+              <el-radio :label="1" @click.native="changeGrade(searchData.grade)">VIP会员</el-radio>
             </el-radio-group>
           </div>
           <div class="form-group f-cb">
@@ -42,7 +42,7 @@
         <el-table class="m-table" :data="tableData" stripe style="width: 100%">
           <el-table-column label="姓名" width="120">
             <template scope="scope">
-              <span class="avatar">{{ scope.row.username.substr(0,1)}}</span>
+              <span class="avatar">{{ scope.row.username.substr(0,1).toUpperCase()}}</span>
               <!-- <span v-popover:customerInfo>{{scope.row.name}}</span> -->
               <el-popover placement="bottom-start" trigger="hover">
                 <div>
@@ -68,18 +68,19 @@
               <span>{{scope.row.grade | formatStatus('gradeType')}}</span>
             </template>
           </el-table-column>
-          <!-- <el-table-column prop="profession" label="职业">
-            </el-table-column> -->
-          <el-table-column width="180" prop="orderCount" label="累计订单数">
-
-          </el-table-column>
-          <el-table-column width="180" prop="orderMoneyConut" label="累计订单金额">
-
-          </el-table-column>
-
-          <el-table-column width="150" label="办理时间" prop="createTime">
+          <el-table-column width="150" label="累计订单数" class="f-tar">
             <template scope="scope">
-              <!-- <span>{{new Date(scope.row.createTime*1).toLocaleString()}}</span> -->
+              <span>{{scope.row.orderCount?scope.row.orderCount:0}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column width="180" label="累计订单金额" class="f-tar">
+            <template scope="scope">
+              <span>{{scope.row.orderMoneyConut?scope.row.orderMoneyConut:0}}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column width="180" label="办理时间" prop="createTime">
+            <template scope="scope">
               <span>{{scope.row.createTime | formatDate}}</span>
             </template>
           </el-table-column>
@@ -97,7 +98,7 @@
       <!-- 分页模块 -->
       <div class="m-pagination f-fr">
         <!-- <Pagination :pagegationConfig=""></Pagination>  -->
-        <el-pagination @current-change="handleCurrentChange" :current-page="1" layout="total, prev, pager, next, jumper" :total="totalCount">
+        <el-pagination @current-change="handleCurrentChange" :current-page="1" layout="total, prev, pager, next, jumper" :total="totalCount" :pageSize="pageSize">
         </el-pagination>
       </div>
     </div>
@@ -123,7 +124,7 @@ export default {
       searchData: {
         searchContent: '',
         placeholder: '请输入会员姓名、电话',
-        grade: 0,
+        grade: -1,
         data: 0,
         startDate: '',
         endDate: '',
@@ -131,7 +132,7 @@ export default {
       },
       datePickerConfig: {
         disabledDate(time) {
-          return time.getTime() >= Date.now() - 8.64e7;
+          return time.getTime() > Date.now() - 8.64e7;
         }
       },
       form: {
@@ -145,7 +146,8 @@ export default {
         desc: ''
       },
       tableData: [],
-      totalCount: 0
+      totalCount: 0,
+      pageSize: 10
     }
   },
   components: {
@@ -156,29 +158,44 @@ export default {
       // console.log(123);
     },
     handleCurrentChange: function(val) {
-      console.log(val);
-      this.$router.push('/home/customer/' + val);
+      this.$router.push('/home/customer/list/' + val);
     },
     choiceDate: function(event) {
-      console.log(123);
       this.searchData.showDatePicker = true;
     },
     handleDelete: function(index, item) {
       console.log(index, item);
       let params = { _id: item._id }
-      this.http('customer', 'delete', params).then((res) => {
-        console.log(res.data);
-        if(res.data.status == 0){
-          this.getList();
-        }
-      });
+      this.$confirm('此操作将永久删除该会员信息, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then((res) => {
+        this.http('customer', 'delete', params).then((res) => {
+          console.log(res.data);
+          if (res.data.status == 0) {
+            this.getList();
+          }
+        });
+      })
+
+
     },
-    handleEdit:function(index,item){},
-    handleDetail:function(index,item){},
+    handleEdit: function(index, item) { },
+    handleDetail: function(index, item) { },
+    changeGrade: function(value) {
+      console.log('change');
+      if (value * 1 < 0) {
+        this.$router.push({ path: '/home/customer/list/1' });
+      } else {
+        this.$router.push({ path: '/home/customer/list/1', query: { grade: value } });
+      }
+
+    },
     getList: function() {
-      console.log(this.$route);
       let currentParams = this.$route.params;
-      currentParams.pageSize = 10;
+      currentParams = _.assign({}, currentParams, this.$route.query);
+      currentParams.pageSize = this.pageSize;
       this.http('customer', 'list', currentParams).then((res) => {
         let data = res.data;
         this.tableData = data.data;
@@ -191,14 +208,12 @@ export default {
       });
     }
   },
-  directives: {
-    modal: {
-      bind: (el) => {
-        el.onmouseenter = function() {
-          console.log(1234);
-        }
-      }
+  watch: {
+    '$route': function(newVal, oldVal) {
+      this.getList();
     }
+  },
+  directives: {
   },
   created() {
     console.log('customer-init');
@@ -207,14 +222,7 @@ export default {
 
   },
   activated() {
-      this.getList();
-    // console.log(window);
-    /*window.onclick = ()=>{
-      // console.log(123);
-      console.log(this);
-      this.searchData.showDatePicker = false;
-    }*/
-
+    this.getList();
   },
 }
 </script>

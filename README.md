@@ -6,33 +6,27 @@
 
 > 后端：node： "^6.10.2",express:"^4.14.1"
 
-> 数据库：mogodb,  mongoose: "^4.11.6",
+> 数据库：mongoDB,redis,  mongoose: "^4.11.6",
 
 > 其它插件、工具库 ：lodash ："^4.17.4" ，echarts："^3.7.0"
 
-## Build Setup
 
-``` bash
-# install dependencies
-npm install
+## 功能模块
+* 登录
+* 注册
+* 会员模块
+* 订单模块
+* 商品模块
+* 财务模块
+* 库存模块
+* 权限模块
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 
 ##开发注意事项：
 ### 前端
 1. 对http网络请求知识了解的不够深,项目中使用axios发送post携带参数,前端报错 ` XMLHttpRequest cannot load http://localhost:8080/api/v1/customer. Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response. `  大致意思为设置后端不允许设置`Content-Type`请求头，
-解决方法：响应头中允许设置Content-Type请求头
+解决方法：响应头中允许设置 ` Content-Type ` 请求头
 ```
     //伪代码
     res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
@@ -142,3 +136,21 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 | age      | number  | false |   | 会员年龄
 
 
+
+<!-- ## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+```
+
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader). -->
