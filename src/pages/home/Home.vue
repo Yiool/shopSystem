@@ -3,7 +3,10 @@
 		<top-bar></top-bar>
 		<div class="main-content f-cb">
 			<sider-bar class="sider-bar f-fl"></sider-bar>
-			<router-view class="view-container"></router-view>
+      <keep-alive>
+        <router-view class="view-container"></router-view>
+      </keep-alive>
+
 		</div>
 	</div>
 </template>
