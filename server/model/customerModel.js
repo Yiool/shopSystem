@@ -18,7 +18,7 @@ let CustomerSchema = new Schema({
     remark: { type: String }, //备注信息
     orderCount: { type: Number },
     orderMoneyConut: { type: Number },
-    createTime: { type: Date, default: Date.now() },
+    createTime: { type: String, default: Date.now() },
     staff: { type: String }
 });
 

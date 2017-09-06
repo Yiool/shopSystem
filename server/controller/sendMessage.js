@@ -21,13 +21,10 @@ function sendVerificationCode(phoneNumber, templateParam) {
         }).then(function(res) {
             if (res.Code === "OK") {
                 resolve(res);
-            } else {
-                reject(res);
             }
         }, function(err) {
             reject(res);
         })
     })
 }
-
-export default sendVerificationCode
+module.exports = sendVerificationCode

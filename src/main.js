@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios'
 import store from './store/index.js'
 import permission from './directive/permission.directive'
 import formatStatus from './filter/formatStatus.filter'
+import formatDate from './filter/formatDate.filter'
 import _ from 'lodash'
 import Pagination from './components/pagination/index.js'
 

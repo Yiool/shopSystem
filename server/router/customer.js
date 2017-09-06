@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+let sendVerificationCode = require('../controller/sendMessage')
 let Customer = require('../model/customerModel')
 let _ = require('lodash')
     // const bodyParser = require('body-parser');

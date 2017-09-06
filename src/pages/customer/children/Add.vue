@@ -29,10 +29,10 @@
           <el-form-item label="职业：">
             <el-input class="input-w-180" v-model="form.profession" placeholder="请输入会员职业"></el-input>
           </el-form-item>
-          <el-form-item label="会员类型：" prop="customerType">
-            <el-select class="input-w-180" placeholder="请选择会员类型" v-model="form.customerType">
-              <el-option label="普通会员" value="ordinary"></el-option>
-              <el-option label="vip会员" value="vip"></el-option>
+          <el-form-item label="会员类型：" prop="grade">
+            <el-select class="input-w-180" placeholder="请选择会员类型" v-model="form.grade">
+              <el-option label="普通会员" value="0"></el-option>
+              <el-option label="vip会员" value="1"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item>
@@ -179,7 +179,7 @@ export default {
         age:'',
         profession: '',
         mobile: '',
-        customerType:'ordinary',
+        grade:'0',
         //步骤2数据
         PD:'',
         leftEye:{
@@ -208,12 +208,13 @@ export default {
         opticBrand: '',          //镜片品牌
         opticType:'',            //镜片类型
         remark: '',              //备注信息
+        staff:''
       },
       rules: {
         mobile: [
           {  required: true, message: '请输入11位电话号码', trigger: 'blur' }
         ],
-        customerType:[
+        grade:[
           {  required: true, message: '请选择会员类型', trigger: 'blur' }
         ],
         pd: [

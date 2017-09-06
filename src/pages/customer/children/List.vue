@@ -35,7 +35,6 @@
         </div>
       </div>
       <!-- 表格模块 -->
-    {{tableData[0].grade | formatStatus('gradeType')}}
       <div class="m-table">
         <el-button type="primary" v-permission:customer:add>
           <router-link to="/home/customer/add">新增会员</router-link>
@@ -64,7 +63,10 @@
           </el-table-column>
           <el-table-column width="130" prop="mobile" label="电话">
           </el-table-column>
-          <el-table-column width="100" prop="grade" label="会员等级">
+          <el-table-column width="100" label="会员等级">
+            <template scope="scope">
+              <span>{{scope.row.grade | formatStatus('gradeType')}}</span>
+            </template>
           </el-table-column>
           <!-- <el-table-column prop="profession" label="职业">
             </el-table-column> -->
@@ -75,7 +77,11 @@
 
           </el-table-column>
 
-          <el-table-column width="150" prop="createTime" label="办理时间">
+          <el-table-column width="150" label="办理时间" prop="createTime">
+            <template scope="scope">
+              <!-- <span>{{new Date(scope.row.createTime*1).toLocaleString()}}</span> -->
+              <span>{{scope.row.createTime | formatDate}}</span>
+            </template>
           </el-table-column>
           <el-table-column prop="staff" label="经办人">
           </el-table-column>
@@ -176,6 +182,9 @@ export default {
       this.http('customer', 'list', currentParams).then((res) => {
         let data = res.data;
         this.tableData = data.data;
+        /* _.forEach(this.tableData,function(v) {
+          v.createTime = new Date(v.createTime*1).toLocaleString();
+        }); */
         this.totalCount = data.totalCount;
       }).catch((err) => {
         console.log(err.message);
