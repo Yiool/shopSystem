@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import mock from '../util/mock';
+import customerModule from './customerModule/index'
+import orderModule from './orderModule/index'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.use(Vuex);
 
-const state = {
+/* const state = {
     isLogin: false,
     permission: ['home', 'desktop', 'customer', 'customer:add', 'customer:edit', 'customer:delete', 'customer:detail', 'order', 'order:add']
 };
@@ -39,12 +40,13 @@ const mutations = {
 
 const getters = {
 
-}
+} */
+
 
 
 export default new Vuex.Store({
-    state,
-    actions,
-    mutations,
-    getters
+    modules: {
+        customerModule,
+        orderModule
+    }
 })

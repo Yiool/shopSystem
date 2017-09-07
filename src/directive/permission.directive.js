@@ -5,7 +5,7 @@ const permission = Vue.directive('permission', {
     bind: function(el, binding) {
         let flag = false;
         let permission = binding.arg;
-        let permissionList = store.state.permission;
+        let permissionList = store.state.customerModule.permission;
         _.forEach(permissionList, function(v, i) {
             if (v === permission) {
                 flag = true;
