@@ -199,9 +199,6 @@ export default {
       this.http('customer', 'list', currentParams).then((res) => {
         let data = res.data;
         this.tableData = data.data;
-        /* _.forEach(this.tableData,function(v) {
-          v.createTime = new Date(v.createTime*1).toLocaleString();
-        }); */
         this.totalCount = data.totalCount;
       }).catch((err) => {
         console.log(err.message);
@@ -210,7 +207,7 @@ export default {
   },
   watch: {
     '$route': function(newVal, oldVal) {
-      this.getList();
+      // this.getList();
     }
   },
   directives: {

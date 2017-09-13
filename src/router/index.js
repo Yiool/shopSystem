@@ -31,7 +31,7 @@ const routes = [{
             },
             {
                 path: 'order', //订单管理
-                component: PlaceHolder,
+                component: resolve => require(['../components/PlaceHodler'], resolve),
                 redirect: 'order/list/1',
                 children: [{
                         path: 'list/:id', //订单列表
@@ -45,22 +45,25 @@ const routes = [{
             },
             {
                 path: 'customer', // 会员中心
-                component: PlaceHolder,
+                component: resolve => require(['../components/PlaceHodler'], resolve),
                 redirect: 'customer/list/1',
                 children: [{
                         path: 'list/:page', //会员列表
-                        component: CustomerList
+                        // component: CustomerList
+                        component: resolve => require(['../pages/customer/children/List.vue'], resolve)
+
                     },
                     {
                         path: 'add', // 新增会员
-                        component: AddCustomer
+                        // component: AddCustomer
+                        component: resolve => require(['../pages/customer/children/Add.vue'], resolve)
                     }
 
                 ]
             },
             {
-                path: 'goods',
-                component: PlaceHolder,
+                path: 'goods', //商品管理
+                component: resolve => require(['../components/PlaceHodler'], resolve),
                 redirect: 'goods/list/1',
                 children: [{
                     path: 'list/:id',
@@ -71,8 +74,8 @@ const routes = [{
                 }]
             },
             {
-                path: 'financial',
-                component: PlaceHolder,
+                path: 'financial', //财务管理
+                component: resolve => require(['../components/PlaceHodler'], resolve),
                 redirect: 'financial/list/1',
                 children: [{
                     path: 'list/:id',
@@ -80,8 +83,8 @@ const routes = [{
                 }]
             },
             {
-                path: 'inventory',
-                component: PlaceHolder,
+                path: 'inventory', //库存管理
+                component: resolve => require(['../components/PlaceHodler'], resolve),
                 redirect: 'inventory/list/1',
                 children: [{
                     path: 'list/:id',
@@ -89,8 +92,8 @@ const routes = [{
                 }]
             },
             {
-                path: 'permission',
-                component: PlaceHolder,
+                path: 'permission', //权限管理
+                component: resolve => require(['../components/PlaceHodler'], resolve),
                 redirect: 'permission/list/1',
                 children: [{
                     path: 'list/:id',

@@ -3,6 +3,7 @@ const router = express.Router();
 let sendVerificationCode = require('../controller/sendMessage')
 let Customer = require('../model/customerModel')
 let _ = require('lodash')
+let checkSession = require('../controller/checkSession')
     // const bodyParser = require('body-parser');
     // const jsonParser = bodyParser.json();
 
@@ -13,7 +14,7 @@ let _ = require('lodash')
 /**
  * customer post请求----添加一条数据
  */
-router.post('/', function(req, res) {
+router.post('/', checkSession, function(req, res) {
     /* 解析req参数 */
     // console.log(req.body);
     let data = req.body;
@@ -37,13 +38,14 @@ router.post('/', function(req, res) {
 /**
  * get请求---- 返回所有custoer信息
  */
-router.get('/', function(req, res) {
+router.get('/', checkSession, function(req, res) {
     /* 解析req参数 */
     //1. 页码page
     //2. 每页条数pagesize
     //3. 会员等级 grade
     //4. 创建时间(Unix时间戳) createtime
     //5. 排序
+    console.log(req.session);
     let page = req.query.page * 1 || 1; //第几页 默认第一页
     let pageSize = req.query.pageSize * 1 || 10; //每页多少条,默认10条
     let limit = pageSize;

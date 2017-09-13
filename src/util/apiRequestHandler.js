@@ -122,6 +122,7 @@ const apiRequestHandler = function(parent, current, dataConfig) {
             timeout: 5000,
             url: now.url,
             method: now.type,
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'

@@ -1,7 +1,8 @@
 let checkSession = function(req, res, next) {
     let user = req.session.user;
+    console.log('check', user);
     if (!user) {
-        res.status = 401;
+        res.sendStatus(401);
     }
     next();
 }
