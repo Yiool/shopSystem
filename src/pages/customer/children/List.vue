@@ -207,19 +207,20 @@ export default {
   },
   watch: {
     '$route': function(newVal, oldVal) {
-      // this.getList();
+      this.getList();
     }
   },
   directives: {
   },
   created() {
+    this.getList();
     console.log('customer-init');
   },
   mounted() {
 
   },
   activated() {
-    this.getList();
+    // this.getList();
   },
 }
 </script>

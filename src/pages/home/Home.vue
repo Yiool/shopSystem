@@ -3,9 +3,9 @@
 		<top-bar></top-bar>
 		<div class="main-content f-cb">
 			<sider-bar class="sider-bar f-fl"></sider-bar>
-      <keep-alive>
+      <!-- <keep-alive> -->
         <router-view class="view-container"></router-view>
-      </keep-alive>
+      <!-- </keep-alive> -->
 
 		</div>
 	</div>

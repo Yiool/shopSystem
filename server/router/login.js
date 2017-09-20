@@ -42,7 +42,7 @@ router.post('/', urlencodedParser, function(req, res) {
                 })
             }
         } else {
-            res.status = 500;
+            res.sendStatus(500);
         }
 
     });
