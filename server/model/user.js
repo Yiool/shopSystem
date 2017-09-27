@@ -3,7 +3,7 @@ let mongoose = require('../controller/mongoose'),
 
 let UserSchema = new Schema({
     username: { type: String }, //用户账号
-    userpwd: { type: String }, //密码
+    password: { type: String }, //密码
     role: { type: String },
     userid: { type: String },
     logindate: { type: String } //最近登录时间

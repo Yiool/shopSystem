@@ -6,10 +6,7 @@ import Router from '../router/index'
 /**
  * 请求拦截器
  */
-var loadinginstace;
 Axios.interceptors.request.use(function(config) {
-    // this.$message('这是一条消息提示');
-    // loadinginstace = Loading.service({ fullscreen: true })
     return config;
 }, (error) => {
     return Promise.reject(error);
@@ -108,6 +105,8 @@ Axios.interceptors.response.use(function(response) {
     // 对响应错误做点什么
     return Promise.reject(err);
 });
+
+const BASR_URL = 'http://localhost:8080/api/v1';
 const apiRequestHandler = function(parent, current, dataConfig) {
     return new Promise((resolve, reject) => {
         let now = apiConfig[parent][current];
@@ -118,11 +117,11 @@ const apiRequestHandler = function(parent, current, dataConfig) {
          * 3.请求路径（这里的url等于 根路径baseURL加上传入的路径）
          */
         let DEFAULT_AXIOS_CONFIG = {
-            baseURL: 'http://localhost:8080/api/v1',
+            baseURL: BASR_URL,
             timeout: 5000,
             url: now.url,
             method: now.type,
-            withCredentials: true,
+            withCredentials: true,  //设置跨域请求时携带在cookie中携带session信息
             headers: {
                 'Content-Type': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
@@ -130,13 +129,12 @@ const apiRequestHandler = function(parent, current, dataConfig) {
         };
 
         /**
-         * 默认请求参数（针对分页）
+         * 
          * 1.t 请求时间戳、防止浏览器缓存，保证获取到最新数据
          */
         let DEFAULT_PARAMS = {
             t: new Date().getTime()
         }
-
 
         /**
          * 区别get和post请求 做不同配置
@@ -154,6 +152,8 @@ const apiRequestHandler = function(parent, current, dataConfig) {
                 data: data
             })
         }
+
+
         Axios(DEFAULT_AXIOS_CONFIG).then((res) => {
             resolve(res);
         }).catch((err) => {

@@ -25,7 +25,7 @@ router.post('/', urlencodedParser, function(req, res) {
 
             req.session.user = doc;
             // console.log(req.session.user);
-            let pwd = doc.userpwd;
+            let pwd = doc.password;
             if (pwd === password) {
                 res.json({
                     data: {
