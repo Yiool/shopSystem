@@ -59,13 +59,17 @@
 		position: fixed;
 		top: 80px;
 		left: 0;
+		float: left;
 		height: 100%;
-		width: 150px;
+		// width: 150px;
 		min-height: 100%;
 		background-color: #eef1f6;
+		overflow: auto;
+		
 	}
 
 	.view-container {
 		padding-left: 150px;
+		overflow: hidden;
 	}
 </style>

@@ -36,15 +36,15 @@
             </div>
 
             <div class="data-analysis">
-                <h3 class="title">数据分析</h3>
+                <!-- <h3 class="title">数据分析</h3>
                 <div>
                     <span>周</span>
                     <span>月</span>
                     <span>年</span>
-                </div>
-                <div class="charts-wraper">
+                </div> -->
+                <!-- <div class="charts-wraper">
                     <div id="myChart"></div>
-                </div>
+                </div> -->
             </div>
 			<!-- <Toast :obj=obj></Toast> -->
         </div>
@@ -130,7 +130,7 @@ export default {
 
     },
     mounted(){
-        this.initChart();
+        // this.initChart();
     }
 }
 </script>

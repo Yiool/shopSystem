@@ -122,7 +122,7 @@ export default {
           ]
         }
       ],
-      isCollapse: true,
+      isCollapse: false,
       isRouter: true,
       open: true,
       close: false

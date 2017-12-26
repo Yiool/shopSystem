@@ -196,6 +196,7 @@ export default {
       let currentParams = this.$route.params;
       currentParams = _.assign({}, currentParams, this.$route.query);
       currentParams.pageSize = this.pageSize;
+      currentParams.token = window.sessionStorage.getItem('token');
       this.http('customer', 'list', currentParams).then((res) => {
         let data = res.data;
         this.tableData = data.data;

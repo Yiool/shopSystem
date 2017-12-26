@@ -23,73 +23,76 @@
 
 <script>
 export default {
-    components:{
-        // Pagegation
+  components: {
+    // Pagegation
+  },
+  data() {
+    return {
+      username: "",
+      password: "",
+      role: "0",
+      showWarning: false
+    };
+  },
+  methods: {
+    interception: function() {
+      let flag = true;
+      if (!this.username) {
+        flag = false;
+      }
+      if (!this.password) {
+        flag = false;
+      }
+      return flag;
     },
-    data() {
-        return {
-            username: '',
-            password: '',
-            role:'0',
-            showWarning:false,
+    login: function() {
+      if (!this.interception()) {
+        return false;
+      }
+      this.http("home", "login", {
+        username: this.username,
+        password: this.password,
+        role: "0"
+      }).then(res => {
+        let data = res.data;
+        if (data.status === 0) {
+          window.sessionStorage.setItem("token", data.token);
+          this.$router.push({ path: "/home" });
+        } else {
+          this.showWarning = true;
         }
-    },
-    methods: {
-        interception:function(){
-          let flag = true;
-          if(!this.username){
-            flag= false;
-          }
-          if(!this.password){
-            flag= false;
-          }
-          return flag;
-        },
-        login: function () {
-            if(!(this.interception())){
-              return false;
-            }
-            this.http('home','login',{username:this.username,password:this.password,role:'0'}).then((res)=>{
-              let data = res.data;
-              if(data.status === 0){
-                this.$router.push({path:'/home'});
-              } else {
-                this.showWarning = true;
-              }
-            })
-        },
-    },
-    mounted(){
-
+      });
     }
-}
+  },
+  mounted() {}
+};
 </script>
 
 <style lang="less" scoped>
 .login-box {
-    width: 100%;
-    height: 100%;
-    background: url('./images/login-bg.jpg') center;
-    .form-box {
-        width: 500px;
-        padding-top: 50px;
-        padding-right: 20px;
-        padding-bottom: 30px;
-        position: fixed;
-        top: 150px;
-        right: 300px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, .25);
-        background: url('./images/login-bg.jpg') no-repeat center;
-        background-size: 100% 100%;
-        .warning-tips {
-            color: red;
-            line-height: 34px;
-            padding-left: 60px;
-        }
-        input {
-            background: transparent;
-        }
+  width: 100%;
+  height: 100%;
+  background: url("./images/login-bg.jpg") center;
+  .form-box {
+    width: 500px;
+    padding-top: 50px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+    position: fixed;
+    top: 150px;
+    right: 300px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    background: url("./images/login-bg.jpg") no-repeat center;
+    background-size: 100% 100%;
+    .warning-tips {
+      color: red;
+      line-height: 34px;
+      padding-left: 60px;
     }
+    input {
+      background: transparent;
+    }
+  }
 }
 </style>
 

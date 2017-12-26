@@ -3,9 +3,11 @@ const express = require('express')
 const router = require('./router/router')
 const bodyParser = require('body-parser')
 const mongoose = require('./controller/mongoose')
-let session = require('express-session');
-let cookieParser = require('cookie-parser')
-let checkSession = require('./controller/checkSession')
+const session = require('express-session');
+const cookieParser = require('cookie-parser')
+const chalk = require('chalk');
+const morgan = require('morgan');
+// let checkSession = require('./controller/checkSession')
 let app = express();
 // app.use(checkSession);
 app.use(session({
@@ -25,6 +27,7 @@ app.use(bodyParser.urlencoded({
 
 // parse application/json
 app.use(bodyParser.json())
+app.use(morgan('dev'));
 
 let server = require('http').createServer(app);
 //指定静态文件的位置
@@ -43,7 +46,7 @@ http.get(pageUrl, function(res) {
 });*/
 
 app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", 'http://localhost:8091');
+    res.header("Access-Control-Allow-Origin", 'http://localhost:9099');
     res.header("Access-Control-Allow-Credentials", true);
     res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
@@ -67,5 +70,5 @@ app.use(function(req, res, next) {
 });
 
 
-server.listen(8080);
-console.log('create a local server')
+server.listen(8088);
+console.log('create a local server at: ' + chalk.blue.underline.bold(8088))
