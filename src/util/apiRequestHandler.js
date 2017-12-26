@@ -7,13 +7,10 @@ import Router from "../router/index";
  * 请求拦截器
  */
 Axios.interceptors.request.use(
-  function(config) {
+  config => {
     return config;
   },
   error => {
-    Message.error({
-      message: "err.message"
-    });
     return Promise.reject(error);
   }
 );
@@ -22,10 +19,22 @@ Axios.interceptors.request.use(
  * 响应拦截器
  */
 Axios.interceptors.response.use(
-  function(response) {
+  response => {
+    // 自定义返回码 作不同处理
+    const data = response.data;
+    if (data && data.status)
+      switch (data.status) {
+        // 登录超时
+        case 400001:
+          Message.error({
+            message: "登录超时，请重新登录"
+          });
+          Router.push({ path: "/login" });
+          break;
+      }
     return response;
   },
-  function(err) {
+  err => {
     if (err && err.response) {
       switch (err.response.status) {
         case 400:
@@ -115,6 +124,7 @@ Axios.interceptors.response.use(
 );
 
 const BASR_URL = "http://localhost:8088/api/v1";
+
 const apiRequestHandler = function(parent, current, dataConfig) {
   return new Promise((resolve, reject) => {
     let now = apiConfig[parent][current];
@@ -140,8 +150,10 @@ const apiRequestHandler = function(parent, current, dataConfig) {
      *
      * 1.t 请求时间戳、防止浏览器缓存，保证获取到最新数据
      */
+    const token = window.sessionStorage.getItem('token');
     let DEFAULT_PARAMS = {
-      t: +new Date()
+      t: +new Date(),
+      token
     };
 
     /**

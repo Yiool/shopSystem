@@ -7,16 +7,11 @@ let checkSession = require("../controller/checkSession");
 const config = require("../config/index.js");
 const jwt = require("jsonwebtoken");
 const verifyToken = require("../controller/verifyToken.js");
-// const bodyParser = require('body-parser');
-// const jsonParser = bodyParser.json();
-
-// create application/x-www-form-urlencoded parser
-// var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 /**
  * customer post请求----添加一条数据
  */
-router.post("/", checkSession, function(req, res) {
+router.post("/", verifyToken, function(req, res) {
   /* 解析req参数 */
   // console.log(req.body);
   let data = req.body;
@@ -90,7 +85,7 @@ router.get("/", verifyToken, function(req, res) {
   });
 });
 
-router.delete("/", function(req, res) {
+router.delete("/", verifyToken, function(req, res) {
   console.log(req);
   let userid = req.query._id;
   Customer.remove(

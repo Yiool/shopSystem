@@ -41,7 +41,7 @@
         </el-button>
         <el-table class="m-table" :data="tableData" stripe style="width: 100%">
           <el-table-column label="姓名" width="120">
-            <template scope="scope">
+            <template slot-scope="scope">
               <span class="avatar">{{ scope.row.username.substr(0,1).toUpperCase()}}</span>
               <!-- <span v-popover:customerInfo>{{scope.row.name}}</span> -->
               <el-popover placement="bottom-start" trigger="hover">
@@ -64,30 +64,30 @@
           <el-table-column width="130" prop="mobile" label="电话">
           </el-table-column>
           <el-table-column width="100" label="会员等级">
-            <template scope="scope">
+            <template slot-scope="scope">
               <span>{{scope.row.grade | formatStatus('gradeType')}}</span>
             </template>
           </el-table-column>
           <el-table-column width="150" label="累计订单数" class="f-tar">
-            <template scope="scope">
+            <template slot-scope="scope">
               <span>{{scope.row.orderCount?scope.row.orderCount:0}}</span>
             </template>
           </el-table-column>
           <el-table-column width="180" label="累计订单金额" class="f-tar">
-            <template scope="scope">
+            <template slot-scope="scope">
               <span>{{scope.row.orderMoneyConut?scope.row.orderMoneyConut:0}}</span>
             </template>
           </el-table-column>
 
           <el-table-column width="180" label="办理时间" prop="createTime">
-            <template scope="scope">
+            <template slot-scope="scope">
               <span>{{scope.row.createTime | formatDate}}</span>
             </template>
           </el-table-column>
           <el-table-column prop="staff" label="经办人">
           </el-table-column>
           <el-table-column label="操作" width="200">
-            <template scope="scope">
+            <template slot-scope="scope">
               <el-button v-permission:customer:edit size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
               <el-button v-permission:customer:detail size="small" @click="handleDetail(scope.$index, scope.row)">详情</el-button>
               <el-button v-permission:customer:delete size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>

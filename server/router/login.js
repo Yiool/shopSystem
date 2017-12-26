@@ -27,9 +27,13 @@ router.post("/", function(req, res) {
       // console.log(req.session.user);
       let pwd = doc.password;
       if (pwd === password) {
-        console.log('1111', config.secret);
-        var token = jwt.sign({username: 'admin',password: '123456'}, config.secret, {
-          expiresIn: 60 // 设置过期时间
+        const userInfo = {
+          username: doc.username,
+          password: doc.password
+        };
+        console.log('type----- ',typeof doc);
+        var token = jwt.sign(userInfo, config.secret, {
+          expiresIn: config.expires // 设置过期时间
         });
         res.json({
           data: {
