@@ -1,7 +1,7 @@
 const SMSClient = require('aliyun-sms-node')
     // ACCESS_KEY_ID/ACCESS_KEY_SECRET 根据实际申请的账号信息进行替换
-const accessKeyId = 'LTAIz6mS4PEo6WIv'
-const secretAccessKey = 'YoYrUWBzYvQzo9VnPZS7gSMI9JSOyn'
+const accessKeyId = 'xxxx'
+const secretAccessKey = 'xxxx'
     //初始化sms_client
 let key = {
     AccessKeyId: accessKeyId,
